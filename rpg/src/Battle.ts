@@ -1,17 +1,20 @@
 import {Player} from './Player';
 import {Npc} from './npc/Npc';
 import {Logger} from './log/Logger';
+import {Reward} from './interfaces/Reward';
 
 export class Battle {
     private _player: Player;
     private _npc: Npc;
     private _didPlayerWin: Boolean;
+    private _reward: Reward;
     public battleLog: Logger;
 
-    constructor(player: Player, npc: Npc) {
+    constructor(player: Player, npc: Npc, reward: Reward) {
         this._player = player;
         this._npc = npc;
         this.battleLog = new Logger();
+        this._reward = reward;
     }
 
     public battle = () => {
@@ -20,14 +23,15 @@ export class Battle {
             this.battleLog.log({player: this._player.stats, npc: this._npc.stats});
         }
 
-        this.battleLog.console();
-        this._didPlayerWin = this._player.health > 0
+        this._didPlayerWin = this._player.health > 0;
     }
 
     private playRound = () => {
-        this._player.health = this._player.health - this._npc.performAttack();
-        this._npc.health = this._npc.health - this._player.performAttack();
+        this._player.health = this._player.health - (this._npc.performAttack() - this.player.performDefence());
+        this._npc.health = this._npc.health - (this._player.performAttack() - this.npc.performDefence());
     }
+
+    public claimPrize = () => this._didPlayerWin ? this._reward : [];
 
     public get didPlayerWin() {
         return this._didPlayerWin;
