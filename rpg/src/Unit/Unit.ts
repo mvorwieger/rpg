@@ -11,11 +11,9 @@ export class Unit {
         this.moveBehaviour = move;
     }
 
-    public performMove = () =>
-        this.moveBehaviour.move();
+    public performMove = (): number => this.moveBehaviour.move();
 
-    public performAttack = () =>
-        this.attackBehaviour.attack();
+    public performAttack = (): number => this.attackBehaviour.attack();
 
     public setMoveBehaviour(move: MoveBehaviour) {
         this.moveBehaviour = move;
