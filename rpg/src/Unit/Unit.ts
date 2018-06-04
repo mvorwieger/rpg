@@ -2,32 +2,40 @@ import {MoveBehaviour} from '../interfaces/MoveBehaviour';
 import {AttackBehaviour} from '../interfaces/AttackBehaviour';
 
 export class Unit {
-    private moveBehaviour: MoveBehaviour;
-    private attackBehaviour: AttackBehaviour;
-    private health: number = 100;
+    private _moveBehaviour: MoveBehaviour;
+    private _attackBehaviour: AttackBehaviour;
+    private _health: number = 100;
 
     public constructor(move: MoveBehaviour, attack: AttackBehaviour) {
-        this.attackBehaviour = attack;
-        this.moveBehaviour = move;
+        this._attackBehaviour = attack;
+        this._moveBehaviour = move;
     }
 
-    public performMove = (): number => this.moveBehaviour.move();
+    public performMove = (): number => this._moveBehaviour.move();
 
-    public performAttack = (): number => this.attackBehaviour.attack();
+    public performAttack = (): number => this._attackBehaviour.attack();
 
     public setMoveBehaviour(move: MoveBehaviour) {
-        this.moveBehaviour = move;
+        this._moveBehaviour = move;
     }
 
     public setAttackBehaviour(attack: AttackBehaviour) {
-        this.attackBehaviour = attack;
+        this._attackBehaviour = attack;
     }
 
     get health() {
-        return this.health;
+        return this._health;
     }
 
     set health(value: number) {
-        this.health = value;
+        this._health = value;
+    }
+
+    get stats() {
+        return {
+            health: this._health,
+            movementSpeed: this.performMove(),
+            attackDamage: this.performAttack()
+        }
     }
 }

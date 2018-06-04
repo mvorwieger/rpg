@@ -10,4 +10,3 @@ NPC.health = 200;
 
 const battle = new Battle(PLAYER, NPC);
 battle.battle();
-console.log(battle.result());
