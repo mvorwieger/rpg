@@ -1,3 +1,3 @@
 export interface MoveBehaviour {
-    move: Function;
+    move: Function
 }

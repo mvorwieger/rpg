@@ -1,31 +1,43 @@
 import {Player} from './Player';
 import {Npc} from './npc/Npc';
+import {Logger} from './log/Logger';
 
 export class Battle {
-    private player: Player;
-    private npc: Npc;
-    private didPlayerWin: Boolean;
+    private _player: Player;
+    private _npc: Npc;
+    private _didPlayerWin: Boolean;
+    public battleLog: Logger;
 
     constructor(player: Player, npc: Npc) {
-        this.player = player;
-        this.npc = npc;
+        this._player = player;
+        this._npc = npc;
+        this.battleLog = new Logger();
     }
 
     public battle = () => {
-        while (this.player.health >= 0 && this.npc.health >= 0) {
-            this.x();
+        while (this._player.health >= 0 && this._npc.health >= 0) {
+            this.playRound();
+            this.battleLog.log({player: this._player.stats, npc: this._npc.stats});
         }
 
-        this.didPlayerWin = this.player.health > 0
+        this.battleLog.console();
+        this._didPlayerWin = this._player.health > 0
     }
 
-    private x = () => {
-        this.player.health = this.player.health - this.npc.performAttack();
-        this.npc.health = this.npc.health - this.player.performAttack();
+    private playRound = () => {
+        this._player.health = this._player.health - this._npc.performAttack();
+        this._npc.health = this._npc.health - this._player.performAttack();
     }
 
+    public get didPlayerWin() {
+        return this._didPlayerWin;
+    }
 
-    public result = (): Boolean => {
-        return this.didPlayerWin;
+    public get player() {
+        return this._player;
+    }
+
+    public get npc() {
+        return this._npc;
     }
 }
