@@ -1,7 +1,6 @@
 import {Player} from './Player';
 import {Npc} from './npc/Npc';
 import {Logger} from './log/Logger';
-import {Reward} from './interfaces/Reward';
 
 export class Battle {
     private _player: Player;
