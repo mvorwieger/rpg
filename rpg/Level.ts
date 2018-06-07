@@ -1,5 +1,5 @@
-import {Battle} from '../Battle';
-import {Reward} from './Reward';
+import {Battle} from './src/Battle';
+import {Reward} from './src/interfaces/Reward';
 
 export class Level {
     private reward: Reward;
