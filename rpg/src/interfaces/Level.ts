@@ -1,7 +1,20 @@
 import {Battle} from '../Battle';
 import {Reward} from './Reward';
 
-export interface Level {
-    reward: Reward,
-    battle: Battle
+export class Level {
+    private reward: Reward;
+    private battle: Battle;
+
+    constructor(reward: Reward,
+                battle: Battle) {
+       this.battle = battle;
+       this.reward = reward;
+    }
+
+    public startLevel() {
+        this.battle.battle();
+    }
+
+    public claimPrize = () => this.battle.didPlayerWin ? this.reward : [];
+
 }

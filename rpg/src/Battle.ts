@@ -7,14 +7,12 @@ export class Battle {
     private _player: Player;
     private _npc: Npc;
     private _didPlayerWin: Boolean;
-    private _reward: Reward;
     public battleLog: Logger;
 
-    constructor(player: Player, npc: Npc, reward: Reward) {
+    constructor(player: Player, npc: Npc) {
         this._player = player;
         this._npc = npc;
         this.battleLog = new Logger();
-        this._reward = reward;
     }
 
     public battle = () => {
@@ -30,8 +28,6 @@ export class Battle {
         this._player.health = this._player.health - (this._npc.performAttack() - this.player.performDefence());
         this._npc.health = this._npc.health - (this._player.performAttack() - this.npc.performDefence());
     }
-
-    public claimPrize = () => this._didPlayerWin ? this._reward : [];
 
     public get didPlayerWin() {
         return this._didPlayerWin;
