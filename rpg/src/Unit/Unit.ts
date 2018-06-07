@@ -1,6 +1,6 @@
-import {MoveBehaviour} from '../interfaces/MoveBehaviour';
-import {AttackBehaviour} from '../interfaces/AttackBehaviour';
-import {DefenceBehaviour} from '../interfaces/DefenceBehaviour';
+import {MoveBehaviour} from '../interfaces/Behaviours/MoveBehaviour';
+import {AttackBehaviour} from '../interfaces/Behaviours/AttackBehaviour';
+import {DefenceBehaviour} from '../interfaces/Behaviours/DefenceBehaviour';
 import {NoDefence} from '../defence/NoDefence';
 import {NoAttack} from '../attack/NoAttack';
 

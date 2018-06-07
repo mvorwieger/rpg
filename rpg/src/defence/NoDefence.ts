@@ -1,4 +1,4 @@
-import {DefenceBehaviour} from '../interfaces/DefenceBehaviour';
+import {DefenceBehaviour} from '../interfaces/Behaviours/DefenceBehaviour';
 
 export class NoDefence implements DefenceBehaviour{
     blockPercentage = null;
