@@ -1,5 +1,5 @@
 import {Item} from './Item';
 
 export interface Reward {
-    items: Item[];
+    [index: number]: Item;
 }
