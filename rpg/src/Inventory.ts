@@ -1,17 +1,21 @@
 import {Item} from './interfaces/Item';
 
 export class Inventory {
-    _items: Item[] = [];
+    private _items: Item[] = [];
 
-    public takeOut(nameOfItem): Item {
+    public searchItem(nameOfItem): Item {
         return this._items.find((iterator) => iterator.name === nameOfItem);
     }
 
-    public add(item: Item) {
+    public add(item: Item): void {
         this._items.push(item);
     }
 
-    get items() {
+    public removeItem(item: Item): void {
+        this._items = this._items.filter(itemIterator => itemIterator !== item);
+    }
+
+    get items(): Item[] {
         return this._items;
     }
 }
