@@ -5,16 +5,22 @@ import {Battle} from './Battle';
 import {Player} from './Player';
 import {Shield} from './defence/Shield';
 import {Level} from './Level';
+import {Item} from './Item';
 
-const PLAYER = new Player(new RideHorse(), new Axe(), new Shield(10, 15));
-const NPC = NpcFactory.createTroll();
-NPC.health = 1;
+function start() {
+    const PLAYER = new Player(new RideHorse(), new Axe(), new Shield(10, 15));
+    const NPC = NpcFactory.createTroll();
+    NPC.health = 200;
 
-const battle = new Battle(PLAYER, NPC);
-const reward = [new Axe()];
-const level = new Level(reward, battle);
+    const battle = new Battle(PLAYER, NPC);
+    const item = new Item('common', 322, 'Axe', new Axe());
+    const reward = [item];
+    const level = new Level(reward, battle);
 
-level.startLevel();
+    level.startLevel();
+    console.dir(battle.battleLog, {depth: null})
+    PLAYER.collectRewards(level.claimPrize());
+    console.log(PLAYER.items);
+}
 
-PLAYER.collectRewards(level.claimPrize());
-console.log(PLAYER.inventory);
+    start();

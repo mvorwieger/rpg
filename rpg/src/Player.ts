@@ -9,7 +9,13 @@ export class Player extends Unit {
         rewards.forEach(item => this._inventory.add(item));
     }
 
-    public get inventory() {
-        return this._inventory;
+    public get items() {
+        return this._inventory.items;
+    }
+
+    public equipItem(itemName: String) {
+        const item = this._inventory.searchItem(itemName);
+        this._inventory.removeItem(item);
+        this.setAttackBehaviour(item.behaviour);
     }
 }
