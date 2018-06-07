@@ -10,4 +10,8 @@ export class Inventory {
     public add(item: Item) {
         this._items.push(item);
     }
+
+    get items() {
+        return this._items;
+    }
 }
