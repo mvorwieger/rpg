@@ -1,4 +1,4 @@
-import {AttackBehaviour} from '../interfaces/AttackBehaviour';
+import {AttackBehaviour} from '../interfaces/Behaviours/AttackBehaviour';
 import {AttackDamage} from '../items/defaults/AttackDamages';
 
 export class NoAttack implements AttackBehaviour {

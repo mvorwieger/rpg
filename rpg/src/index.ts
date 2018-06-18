@@ -11,7 +11,7 @@ import {FireAxe} from './items/Axes/FireAxe';
 function start() {
     const PLAYER = new Player(new RideHorse(), new Axe(), new Shield(10, 15));
     const NPC = NpcFactory.createTroll();
-    NPC.health = 200;
+    NPC.health = 1;
 
     const battle = new Battle(PLAYER, NPC);
     const item = FireAxe;
@@ -21,6 +21,7 @@ function start() {
     level.startLevel();
     PLAYER.collectRewards(level.claimPrize());
     console.log(PLAYER.items);
+    PLAYER.equipItem(PLAYER.items[0].name);
 }
 
 start();
