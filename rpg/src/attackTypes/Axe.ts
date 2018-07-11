@@ -1,5 +1,4 @@
 import {AttackBehaviour} from '../interfaces/Behaviours/AttackBehaviour';
-import {AttackDamage} from '../items/defaults/AttackDamages';
 
 export class Axe implements AttackBehaviour {
     attackDamage: number;
@@ -7,7 +6,7 @@ export class Axe implements AttackBehaviour {
 
     // TODO: ADD specific Axe Behaviour
 
-    constructor(attackDamage = AttackDamage.axe) {
+    constructor(attackDamage: number) {
         this.attackDamage = attackDamage;
     }
 }

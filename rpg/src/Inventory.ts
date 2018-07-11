@@ -3,7 +3,7 @@ import {Item} from './Item';
 export class Inventory {
     private _items: Item[] = [];
 
-    public searchItem(nameOfItem): Item {
+    public searchItem(nameOfItem: string): Item {
         return this._items.find((iterator) => iterator.name === nameOfItem);
     }
 

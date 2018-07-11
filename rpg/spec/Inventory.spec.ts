@@ -1,6 +1,6 @@
 import "jasmine";
 import {Inventory} from '../src/Inventory';
-import {mockItems} from '../src/mocks/itemMock';
+import {mockItems} from './mocks/itemMock';
 
 describe("Inventory::", () => {
     let inventory: Inventory;

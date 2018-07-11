@@ -1,4 +1,4 @@
-import {Item} from '../Item';
+import {Item} from '../../src/Item';
 
 export const mockItems: Item[] = [
     new Item(

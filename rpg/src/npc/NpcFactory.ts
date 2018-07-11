@@ -1,8 +1,8 @@
 import {Troll} from './Troll';
-import {Run} from '../move/Run';
-import {Axe} from '../attack/Axe';
-import {Walk} from '../move/Walk';
-import {Punch} from '../attack/Punch';
+import {Run} from '../moveTypes/Run';
+import {Axe} from '../attackTypes/Axe';
+import {Walk} from '../moveTypes/Walk';
+import {Punch} from '../attackTypes/Punch';
 import {Human} from './Human';
 
 export class NpcFactory {

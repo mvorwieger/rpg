@@ -1,10 +1,10 @@
 export class Item {
-    rarity: String;
+    rarity: string;
     value: number;
-    name: String;
+    name: string;
     behaviour: any;
 
-    constructor(rarity: String, value: number, name: String, behaviour: any = null) {
+    constructor(rarity: string, value: number, name: string, behaviour: any = null) {
         this.rarity = rarity;
         this.value = value;
         this.name = name;
