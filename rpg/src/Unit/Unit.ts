@@ -10,7 +10,7 @@ export class Unit {
     private _defenceBehaviour: DefenceBehaviour;
     private _health: number = 100;
 
-    public constructor(move: MoveBehaviour, attack: AttackBehaviour = new NoAttack(), defence: DefenceBehaviour = new NoDefence()) {
+    public constructor(move: MoveBehaviour, attack: AttackBehaviour, defence: DefenceBehaviour) {
         this._attackBehaviour = attack;
         this._moveBehaviour = move;
         this._defenceBehaviour = defence;

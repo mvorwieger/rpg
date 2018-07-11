@@ -10,7 +10,11 @@ import {FootItem, ShieldItem, WeaponItem} from './items/ItemTypes';
 
 export class Player extends Unit {
     private _inventory: Inventory = new Inventory();
-    private equippedItems: { weapon: WeaponItem, foot: FootItem, shield: ShieldItem };
+    private equippedItems: { weapon: WeaponItem, foot: FootItem, shield: ShieldItem } = {
+        weapon: undefined,
+        foot: undefined,
+        shield: undefined
+    };
 
     constructor(weapon: WeaponItem, foot: FootItem, shield: ShieldItem) {
         /**
@@ -21,6 +25,7 @@ export class Player extends Unit {
         this.equippedItems.foot = foot;
         this.equippedItems.shield = shield;
     }
+
     /**
      * Moves the given items to the Players Inventory
      * @param {Item[]} items
@@ -58,21 +63,21 @@ export class Player extends Unit {
         this.selectBehaviour(item)
     }
 
-    private setWeapon(item: Item) {
+    private setWeapon(item: WeaponItem) {
         if (!this.equippedItems.weapon) {
             this._inventory.add(this.equippedItems.weapon)
             this.equippedItems.weapon = item;
         }
     }
 
-    private setShield(item: Item) {
+    private setShield(item: ShieldItem) {
         if (!this.equippedItems.shield) {
             this._inventory.add(this.equippedItems.shield)
             this.equippedItems.shield = item;
         }
     }
 
-    private setFoot(item: Item) {
+    private setFoot(item: FootItem) {
         if (!this.equippedItems.foot) {
             this._inventory.add(this.equippedItems.foot)
             this.equippedItems.foot = item;
@@ -81,17 +86,17 @@ export class Player extends Unit {
 
     private selectBehaviour(item: Item) {
         if (instanceOfAttackBehaviour(item.behaviour)) {
-            this.setWeapon(item);
+            this.setWeapon(item as WeaponItem);
             this.setAttackBehaviour(item.behaviour);
         }
 
         if (instanceOfDefenceBehaviour(item.behaviour)) {
-            this.setShield(item);
+            this.setShield(item as ShieldItem);
             this.setDefenceBehaviour(item.behaviour);
         }
 
         if (instanceOfMoveBehaviour(item.behaviour)) {
-            this.setFoot(item);
+            this.setFoot(item as FootItem);
             this.setMoveBehaviour(item.behaviour);
         }
     }

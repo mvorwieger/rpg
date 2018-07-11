@@ -14,20 +14,20 @@ export class FootFactory {
         0,
         "Bare Feet",
         new Run()
-    );
+    ) as FootItem;
 
     public static createDamagedBareFeetItem = (): FootItem => new Item(
         Rarity.none,
         0,
         "Bare Feet",
         new Walk()
-    );
+    ) as FootItem;
 
     public static createBaseHorseItem = (): FootItem => new Item(
         Rarity.common,
         10,
         "Base Horse",
         new RideHorse()
-    );
+    ) as FootItem;
 }
 

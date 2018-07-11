@@ -14,12 +14,12 @@ export class ShieldFactory {
         10,
         "Base ShieldItem",
         new Shield(ShieldBaseValues.wooden.blockPercentage, ShieldBaseValues.wooden.blockAmount)
-    );
+    ) as ShieldItem;
 
     public static createNoShieldItem = (): ShieldItem => new Item(
         Rarity.none,
         10,
         "No Shield",
         new NoDefence()
-    );
+    ) as ShieldItem;
 }
