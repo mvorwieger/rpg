@@ -1,11 +1,10 @@
 import {AttackBehaviour} from '../interfaces/Behaviours/AttackBehaviour';
-import {WeaponBaseValues} from '../items/defaults/WeaponBaseValues';
 
 export class Punch implements AttackBehaviour {
     attackDamage: number;
     attack = () => this.attackDamage;
 
-    constructor(attackDamage: number = WeaponBaseValues.punch) {
+    constructor(attackDamage: number) {
         this.attackDamage = attackDamage;
     }
 }

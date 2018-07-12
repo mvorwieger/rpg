@@ -37,4 +37,10 @@ describe("Inventory::", () => {
         inventory.add(mockItems[0]);
         expect(inventory.items).toContain(mockItems[0]);
     });
+
+    it('contains() should return true if the array contains the item', function () {
+        inventory.add(mockItems[0]);
+        expect(inventory.contains(mockItems[0])).toBeTruthy();
+        expect(inventory.contains(mockItems[1])).toBeFalsy();
+    });
 });

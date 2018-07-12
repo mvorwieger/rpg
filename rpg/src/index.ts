@@ -22,8 +22,8 @@ function start() {
     const level = new Level(reward, battle);
 
     level.startLevel();
-    PLAYER.moveItemsToInventory(level.claimPrize() as Item[]);
-    console.log(PLAYER.items);
+    PLAYER.moveItemsToInventory(level.claimPrize());
+    console.log(PLAYER.stats);
     PLAYER.equipItemByRef(PLAYER.items[0]);
 }
 

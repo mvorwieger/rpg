@@ -15,6 +15,10 @@ export class Inventory {
         this._items = this._items.filter(itemIterator => itemIterator !== item);
     }
 
+    public contains(item): boolean {
+        return Boolean(this._items.filter((currentItem: Item) => item.name === currentItem.name).length)
+    }
+
     get items(): Item[] {
         return this._items;
     }

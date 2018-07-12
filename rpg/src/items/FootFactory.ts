@@ -3,31 +3,31 @@ import {Rarity} from './defaults/Raritys';
 import {Run} from '../moveTypes/Run';
 import {Walk} from '../moveTypes/Walk';
 import {RideHorse} from '../moveTypes/RideHorse';
-import {FootItem} from './ItemTypes';
+import {MovementItem} from './ItemTypes';
 
 /**
  * FootFactory is used to create Instances of FootItems
  */
 export class FootFactory {
-    public static createBareFeetItem = (): FootItem => new Item(
+    public static createBareFeetItem = (): MovementItem => new Item(
         Rarity.none,
         0,
         "Bare Feet",
         new Run()
-    ) as FootItem;
+    ) as MovementItem;
 
-    public static createDamagedBareFeetItem = (): FootItem => new Item(
+    public static createDamagedBareFeetItem = (): MovementItem => new Item(
         Rarity.none,
         0,
         "Bare Feet",
         new Walk()
-    ) as FootItem;
+    ) as MovementItem;
 
-    public static createBaseHorseItem = (): FootItem => new Item(
+    public static createBaseHorseItem = (): MovementItem => new Item(
         Rarity.common,
         10,
         "Base Horse",
         new RideHorse()
-    ) as FootItem;
+    ) as MovementItem;
 }
 

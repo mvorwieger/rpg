@@ -5,18 +5,18 @@ import {
     instanceOfMoveBehaviour
 } from './interfaces/Behaviours/BehaviourInstanceHelper'
 import {Item} from './Item';
-import {FootItem, ShieldItem, WeaponItem} from './items/ItemTypes';
+import {MovementItem, DefenceItem, WeaponItem} from './items/ItemTypes';
 
 
 export class Player extends Unit {
     private _inventory: Inventory = new Inventory();
-    private equippedItems: { weapon: WeaponItem, foot: FootItem, shield: ShieldItem } = {
+    private equippedItems: { weapon: WeaponItem, foot: MovementItem, shield: DefenceItem } = {
         weapon: undefined,
         foot: undefined,
         shield: undefined
     };
 
-    constructor(weapon: WeaponItem, foot: FootItem, shield: ShieldItem) {
+    constructor(weapon: WeaponItem, foot: MovementItem, shield: DefenceItem) {
         /**
          * Super Call with the item Behaviours
          */
@@ -48,10 +48,10 @@ export class Player extends Unit {
      * @param {string} itemName
      */
     public equipItemByName(itemName: string) {
-        const item = this._inventory.searchItem(itemName);
+        const item: Item = this._inventory.searchItem(itemName);
         this._inventory.removeItem(item);
 
-        this.selectBehaviour(item.behaviour);
+        this.equipItem(item);
     }
 
     /**
@@ -59,8 +59,10 @@ export class Player extends Unit {
      * @param {Item} item
      */
     public equipItemByRef(item: Item) {
-        this._inventory.removeItem(item);
-        this.selectBehaviour(item)
+        if (this._inventory.contains(item)) {
+            this._inventory.removeItem(item);
+            this.equipItem(item)
+        }
     }
 
     private setWeapon(item: WeaponItem) {
@@ -70,33 +72,33 @@ export class Player extends Unit {
         }
     }
 
-    private setShield(item: ShieldItem) {
+    private setShield(item: DefenceItem) {
         if (!this.equippedItems.shield) {
             this._inventory.add(this.equippedItems.shield)
             this.equippedItems.shield = item;
         }
     }
 
-    private setFoot(item: FootItem) {
+    private setFoot(item: MovementItem) {
         if (!this.equippedItems.foot) {
             this._inventory.add(this.equippedItems.foot)
             this.equippedItems.foot = item;
         }
     }
 
-    private selectBehaviour(item: Item) {
+    private equipItem(item: Item) {
         if (instanceOfAttackBehaviour(item.behaviour)) {
             this.setWeapon(item as WeaponItem);
             this.setAttackBehaviour(item.behaviour);
         }
 
         if (instanceOfDefenceBehaviour(item.behaviour)) {
-            this.setShield(item as ShieldItem);
+            this.setShield(item as DefenceItem);
             this.setDefenceBehaviour(item.behaviour);
         }
 
         if (instanceOfMoveBehaviour(item.behaviour)) {
-            this.setFoot(item as FootItem);
+            this.setFoot(item as MovementItem);
             this.setMoveBehaviour(item.behaviour);
         }
     }

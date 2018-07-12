@@ -7,10 +7,10 @@ export interface WeaponItem extends Item {
     behaviour: AttackBehaviour
 }
 
-export interface FootItem extends Item {
+export interface MovementItem extends Item {
     behaviour: MoveBehaviour
 }
 
-export interface ShieldItem extends Item {
+export interface DefenceItem extends Item {
     behaviour: DefenceBehaviour
 }
