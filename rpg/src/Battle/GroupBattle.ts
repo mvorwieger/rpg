@@ -2,6 +2,7 @@ import {Player} from '../Unit/Player';
 import {Npc} from '../Unit/npc/Npc';
 import {Logger} from '../log/Logger';
 
+// noinspection JSUnusedGlobalSymbols
 export class GroupBattle {
     private playerInBattle: Player;
     private npcs: Npc[];

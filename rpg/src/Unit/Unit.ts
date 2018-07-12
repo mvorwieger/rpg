@@ -1,8 +1,6 @@
 import {MoveBehaviour} from '../items/Behaviours/MoveBehaviour';
 import {AttackBehaviour} from '../items/Behaviours/AttackBehaviour';
 import {DefenceBehaviour} from '../items/Behaviours/DefenceBehaviour';
-import {NoDefence} from '../items/defenceTypes/NoDefence';
-import {NoAttack} from '../items/attackTypes/NoAttack';
 
 export class Unit {
     private moveBehaviour: MoveBehaviour;

@@ -2,7 +2,6 @@ import {NpcFactory} from './Unit/npc/NpcFactory';
 import {Battle} from './Battle/Battle';
 import {Player} from './Unit/Player';
 import {Level} from './Level';
-import {Item} from './items/Item';
 import {MovementFactory} from './items/MovementFactory';
 import {WeaponFactory} from './items/WeaponFactory';
 import {ShieldFactory} from './items/ShieldFactory';
