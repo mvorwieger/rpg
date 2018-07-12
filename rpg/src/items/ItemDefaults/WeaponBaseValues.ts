@@ -1,4 +1,4 @@
-export enum AttackDamage {
+export enum WeaponBaseValues {
     axe = 3,
     sword = 2,
     nothing = 0,

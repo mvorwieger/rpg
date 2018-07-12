@@ -1,5 +1,5 @@
-import {Player} from './Player';
-import {Npc} from './npc/Npc';
+import {Player} from './Unit/Player';
+import {Npc} from './Unit/npc/Npc';
 import {Logger} from './log/Logger';
 
 export class Battle {

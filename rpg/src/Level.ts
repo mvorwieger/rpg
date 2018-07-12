@@ -1,11 +1,11 @@
 import {Battle} from './Battle';
-import {Reward} from './interfaces/Reward';
+import {Item} from './items/Item';
 
 export class Level {
-    private reward: Reward;
+    private readonly reward: Item[];
     private battle: Battle;
 
-    constructor(reward: Reward,
+    constructor(reward: Item[],
                 battle: Battle) {
        this.battle = battle;
        this.reward = reward;
@@ -15,6 +15,5 @@ export class Level {
         this.battle.battle();
     }
 
-    public claimPrize = () => this.battle.didPlayerWin ? this.reward : [];
-
+    public claimPrize = (): Item[] => this.battle.didPlayerWin ? this.reward : [];
 }

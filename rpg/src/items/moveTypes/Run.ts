@@ -1,4 +1,4 @@
-import {MoveBehaviour} from '../interfaces/Behaviours/MoveBehaviour';
+import {MoveBehaviour} from '../Behaviours/MoveBehaviour';
 
 export class Run implements MoveBehaviour {
     moveSpeed: number = 2;

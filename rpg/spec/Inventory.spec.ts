@@ -1,6 +1,6 @@
 import "jasmine";
 import {Inventory} from '../src/Inventory';
-import {mockItems} from '../src/mocks/itemMock';
+import {mockItems} from './mocks/itemMock';
 
 describe("Inventory::", () => {
     let inventory: Inventory;
@@ -36,5 +36,11 @@ describe("Inventory::", () => {
     it('GET items() should return getter for all items', function () {
         inventory.add(mockItems[0]);
         expect(inventory.items).toContain(mockItems[0]);
+    });
+
+    it('contains() should return true if the array contains the item', function () {
+        inventory.add(mockItems[0]);
+        expect(inventory.contains(mockItems[0])).toBeTruthy();
+        expect(inventory.contains(mockItems[1])).toBeFalsy();
     });
 });

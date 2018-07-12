@@ -1,27 +1,30 @@
-import {RideHorse} from './move/RideHorse';
-import {Axe} from './attack/Axe';
-import {NpcFactory} from './npc/NpcFactory';
+import {NpcFactory} from './Unit/npc/NpcFactory';
 import {Battle} from './Battle';
-import {Player} from './Player';
-import {Shield} from './defence/Shield';
+import {Player} from './Unit/Player';
 import {Level} from './Level';
-import {Item} from './Item';
-import {FireAxe} from './items/Axes/FireAxe';
+import {Item} from './items/Item';
+import {MovementFactory} from './items/MovementFactory';
+import {WeaponFactory} from './items/WeaponFactory';
+import {ShieldFactory} from './items/ShieldFactory';
 
 function start() {
-    const PLAYER = new Player(new RideHorse(), new Axe(), new Shield(10, 15));
+    const PLAYER = new Player(
+        WeaponFactory.createBasicSwordItem(),
+        MovementFactory.createBareFeetItem(),
+        ShieldFactory.createNoShieldItem()
+    );
+
     const NPC = NpcFactory.createTroll();
     NPC.health = 1;
 
     const battle = new Battle(PLAYER, NPC);
-    const item = FireAxe;
-    const reward = [item];
+    const reward = [WeaponFactory.createFireAxeItem()];
     const level = new Level(reward, battle);
 
     level.startLevel();
-    PLAYER.collectRewards(level.claimPrize());
-    console.log(PLAYER.items);
-    PLAYER.equipItem(PLAYER.items[0].name);
+    PLAYER.moveItemsToInventory(level.claimPrize());
+    console.log(PLAYER.stats);
+    PLAYER.equipItemByRef(PLAYER.items[0]);
 }
 
 start();

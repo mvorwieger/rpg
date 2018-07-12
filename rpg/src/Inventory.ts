@@ -1,9 +1,9 @@
-import {Item} from './Item';
+import {Item} from './items/Item';
 
 export class Inventory {
     private _items: Item[] = [];
 
-    public searchItem(nameOfItem): Item {
+    public searchItem(nameOfItem: string): Item {
         return this._items.find((iterator) => iterator.name === nameOfItem);
     }
 
@@ -13,6 +13,10 @@ export class Inventory {
 
     public removeItem(item: Item): void {
         this._items = this._items.filter(itemIterator => itemIterator !== item);
+    }
+
+    public contains(item): boolean {
+        return Boolean(this._items.filter((currentItem: Item) => item.name === currentItem.name).length)
     }
 
     get items(): Item[] {
