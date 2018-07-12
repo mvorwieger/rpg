@@ -1,15 +1,15 @@
 export class Logger {
-    private  oldLogs = [];
+    private oldLogs = [];
 
     log(value) {
-        this. oldLogs = [...this.oldLogs, value];
+        this.oldLogs = [...this.oldLogs, value];
     }
 
     get logs() {
-        return this. oldLogs
+        return this.oldLogs
     }
 
     console() {
-        console.log(this. oldLogs);
+        console.log(this.oldLogs);
     }
 }
