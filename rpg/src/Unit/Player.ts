@@ -6,6 +6,7 @@ import {
 } from '../items/Behaviours/Behaviour'
 import {Item} from '../items/Item';
 import {MovementItem, DefenceItem, WeaponItem} from '../items/ItemTypes';
+import {Wallet} from "../Wallet";
 
 
 export class Player extends Unit {
@@ -15,6 +16,7 @@ export class Player extends Unit {
         foot: undefined,
         shield: undefined
     };
+    public wallet = new Wallet();
 
     constructor(weapon: WeaponItem, foot: MovementItem, shield: DefenceItem) {
         /**
@@ -101,5 +103,21 @@ export class Player extends Unit {
             this.setFoot(item as MovementItem);
             this.setMoveBehaviour(item.behaviour);
         }
+    }
+
+    /**
+     * Exchange is used to perform transactions between 2 parties of Transactors
+     * @param {number} amount | Wallet the item is exchanged for
+     * @param {Item} item | Item the money is exchanged for
+     * @param {Wallet} exchangeWallet | Wallet of the opposing Party
+     * @return {any}
+     */
+    public exchange(amount: number, item: Item, exchangeWallet: Wallet) {
+        if(this.wallet.sub(amount)) {
+            this.moveItemsToInventory([item]);
+            exchangeWallet.add(amount);
+            return item;
+        }
+        return false;
     }
 }

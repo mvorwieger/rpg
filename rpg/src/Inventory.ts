@@ -4,7 +4,7 @@ export class Inventory {
     private inventoryItems: Item[] = [];
 
     public searchItem(nameOfItem: string): Item {
-        return this.inventoryItems.find((iterator) => iterator.name === nameOfItem);
+        return this.inventoryItems.find((iterator: Item) => iterator.name === nameOfItem);
     }
 
     public add(item: Item): void {
@@ -12,7 +12,7 @@ export class Inventory {
     }
 
     public removeItem(item: Item): void {
-        this.inventoryItems = this.inventoryItems.filter(itemIterator => itemIterator !== item);
+        this.inventoryItems = this.inventoryItems.filter((itemIterator: Item) => itemIterator !== item);
     }
 
     public contains(item): boolean {
