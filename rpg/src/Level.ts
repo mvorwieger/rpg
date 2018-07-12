@@ -1,4 +1,4 @@
-import {Battle} from './Battle';
+import {Battle} from './Battle/Battle';
 import {Item} from './items/Item';
 
 export class Level {

@@ -7,7 +7,7 @@ describe("Inventory::", () => {
 
     beforeEach(() => {
         inventory = new Inventory();
-    })
+    });
 
     it('add() should add items to the items array', function () {
         inventory.add(mockItems[0]);

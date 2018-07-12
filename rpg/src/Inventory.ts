@@ -1,25 +1,25 @@
 import {Item} from './items/Item';
 
 export class Inventory {
-    private _items: Item[] = [];
+    private  items: Item[] = [];
 
     public searchItem(nameOfItem: string): Item {
-        return this._items.find((iterator) => iterator.name === nameOfItem);
+        return this. items.find((iterator) => iterator.name === nameOfItem);
     }
 
     public add(item: Item): void {
-        this._items.push(item);
+        this. items.push(item);
     }
 
     public removeItem(item: Item): void {
-        this._items = this._items.filter(itemIterator => itemIterator !== item);
+        this. items = this. items.filter(itemIterator => itemIterator !== item);
     }
 
     public contains(item): boolean {
-        return Boolean(this._items.filter((currentItem: Item) => item.name === currentItem.name).length)
+        return Boolean(this. items.filter((currentItem: Item) => item.name === currentItem.name).length)
     }
 
-    get items(): Item[] {
-        return this._items;
+    public get items(): Item[] {
+        return this. items;
     }
 }

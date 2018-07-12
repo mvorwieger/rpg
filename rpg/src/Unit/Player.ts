@@ -9,7 +9,7 @@ import {MovementItem, DefenceItem, WeaponItem} from '../items/ItemTypes';
 
 
 export class Player extends Unit {
-    private _inventory: Inventory = new Inventory();
+    private  inventory: Inventory = new Inventory();
     private equippedItems: { weapon: WeaponItem, foot: MovementItem, shield: DefenceItem } = {
         weapon: undefined,
         foot: undefined,
@@ -31,7 +31,7 @@ export class Player extends Unit {
      * @param {Item[]} items
      */
     public moveItemsToInventory(items: Item[]) {
-        items.forEach(item => this._inventory.add(item));
+        items.forEach(item => this. inventory.add(item));
     }
 
     /**
@@ -40,7 +40,7 @@ export class Player extends Unit {
      * @readonly
      */
     public get items(): Item[] {
-        return this._inventory.items;
+        return this. inventory.items;
     }
 
     /**
@@ -48,8 +48,8 @@ export class Player extends Unit {
      * @param {string} itemName
      */
     public equipItemByName(itemName: string) {
-        const item: Item = this._inventory.searchItem(itemName);
-        this._inventory.removeItem(item);
+        const item: Item = this. inventory.searchItem(itemName);
+        this. inventory.removeItem(item);
 
         this.equipItem(item);
     }
@@ -59,29 +59,29 @@ export class Player extends Unit {
      * @param {Item} item
      */
     public equipItemByRef(item: Item) {
-        if (this._inventory.contains(item)) {
-            this._inventory.removeItem(item);
+        if (this. inventory.contains(item)) {
+            this. inventory.removeItem(item);
             this.equipItem(item)
         }
     }
 
     private setWeapon(item: WeaponItem) {
         if (!this.equippedItems.weapon) {
-            this._inventory.add(this.equippedItems.weapon)
+            this. inventory.add(this.equippedItems.weapon);
             this.equippedItems.weapon = item;
         }
     }
 
     private setShield(item: DefenceItem) {
         if (!this.equippedItems.shield) {
-            this._inventory.add(this.equippedItems.shield)
+            this. inventory.add(this.equippedItems.shield);
             this.equippedItems.shield = item;
         }
     }
 
     private setFoot(item: MovementItem) {
         if (!this.equippedItems.foot) {
-            this._inventory.add(this.equippedItems.foot)
+            this. inventory.add(this.equippedItems.foot);
             this.equippedItems.foot = item;
         }
     }

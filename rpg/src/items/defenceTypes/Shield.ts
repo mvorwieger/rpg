@@ -1,27 +1,17 @@
 import {DefenceBehaviour} from '../Behaviours/DefenceBehaviour';
 
 export class Shield implements DefenceBehaviour {
-    private _blockPercentage: number;
-    private _blockAmount: number;
-
-    constructor(blockPercentage: number, blockAmount: number) {
-        this._blockPercentage = blockPercentage;
-        this._blockAmount = blockAmount;
+    constructor(public readonly blockPercentage: number,
+                public readonly blockAmount: number) {
+        this.blockPercentage = blockPercentage;
+        this.blockAmount = blockAmount;
     }
 
     public block(): number {
         const random = Math.floor((Math.random() * 100) + 1);
 
-        if (random <= this._blockPercentage) {
-            return this._blockAmount
+        if (random <= this.blockPercentage) {
+            return this.blockAmount
         } else return null;
-    }
-
-    public get blockAmount() {
-        return this._blockAmount
-    }
-
-    public get blockPercentage() {
-        return this._blockPercentage
     }
 }

@@ -1,5 +1,5 @@
 import {NpcFactory} from './Unit/npc/NpcFactory';
-import {Battle} from './Battle';
+import {Battle} from './Battle/Battle';
 import {Player} from './Unit/Player';
 import {Level} from './Level';
 import {Item} from './items/Item';
