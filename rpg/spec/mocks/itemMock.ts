@@ -15,4 +15,4 @@ export const mockItems: Item[] = [
         "someName2",
         new NoDefence()
     )
-]
+];

@@ -1,6 +1,3 @@
-import {AttackBehaviour} from './Behaviours/AttackBehaviour';
-import {MoveBehaviour} from './Behaviours/MoveBehaviour';
-import {DefenceBehaviour} from './Behaviours/DefenceBehaviour';
 import {Behaviour} from './Behaviours/Behaviour';
 
 export class Item {
