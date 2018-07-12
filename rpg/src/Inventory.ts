@@ -1,4 +1,4 @@
-import {Item} from './Item';
+import {Item} from './items/Item';
 
 export class Inventory {
     private _items: Item[] = [];

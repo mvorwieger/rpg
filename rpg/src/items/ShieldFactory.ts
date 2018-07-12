@@ -1,8 +1,8 @@
-import {Item} from '../Item';
-import {Rarity} from './defaults/Raritys';
-import {Shield} from '../defenceTypes/Shield';
-import {ShieldBaseValues} from './defaults/ShieldBaseValues';
-import {NoDefence} from '../defenceTypes/NoDefence';
+import {Item} from './Item';
+import {Rarity} from './ItemDefaults/Raritys';
+import {Shield} from './defenceTypes/Shield';
+import {ShieldBaseValues} from './ItemDefaults/ShieldBaseValues';
+import {NoDefence} from './defenceTypes/NoDefence';
 import {DefenceItem} from './ItemTypes';
 
 /**

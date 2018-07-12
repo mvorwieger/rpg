@@ -1,14 +1,14 @@
-import {Item} from '../Item';
-import {Rarity} from './defaults/Raritys';
-import {Run} from '../moveTypes/Run';
-import {Walk} from '../moveTypes/Walk';
-import {RideHorse} from '../moveTypes/RideHorse';
+import {Item} from './Item';
+import {Rarity} from './ItemDefaults/Raritys';
+import {Run} from './moveTypes/Run';
+import {Walk} from './moveTypes/Walk';
+import {RideHorse} from './moveTypes/RideHorse';
 import {MovementItem} from './ItemTypes';
 
 /**
- * FootFactory is used to create Instances of FootItems
+ * MovementFactory is used to create Instances of FootItems
  */
-export class FootFactory {
+export class MovementFactory {
     public static createBareFeetItem = (): MovementItem => new Item(
         Rarity.none,
         0,

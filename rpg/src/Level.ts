@@ -1,5 +1,5 @@
 import {Battle} from './Battle';
-import {Item} from './Item';
+import {Item} from './items/Item';
 
 export class Level {
     private readonly reward: Item[];

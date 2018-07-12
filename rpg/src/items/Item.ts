@@ -1,7 +1,7 @@
-import {AttackBehaviour} from './interfaces/Behaviours/AttackBehaviour';
-import {MoveBehaviour} from './interfaces/Behaviours/MoveBehaviour';
-import {DefenceBehaviour} from './interfaces/Behaviours/DefenceBehaviour';
-import {Behaviour} from './interfaces/Behaviours/Behaviour';
+import {AttackBehaviour} from './Behaviours/AttackBehaviour';
+import {MoveBehaviour} from './Behaviours/MoveBehaviour';
+import {DefenceBehaviour} from './Behaviours/DefenceBehaviour';
+import {Behaviour} from './Behaviours/Behaviour';
 
 export class Item {
     rarity: string;

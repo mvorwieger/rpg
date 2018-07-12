@@ -1,6 +1,6 @@
-import {Item} from '../../src/Item';
-import {NoAttack} from '../../src/attackTypes/NoAttack';
-import {NoDefence} from '../../src/defenceTypes/NoDefence';
+import {Item} from '../../src/items/Item';
+import {NoAttack} from '../../src/items/attackTypes/NoAttack';
+import {NoDefence} from '../../src/items/defenceTypes/NoDefence';
 
 export const mockItems: Item[] = [
     new Item(

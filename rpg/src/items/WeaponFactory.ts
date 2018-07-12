@@ -1,8 +1,8 @@
-import {Item} from '../Item';
-import {Axe} from '../attackTypes/Axe';
-import {Sword} from '../attackTypes/Sword';
-import {Rarity} from './defaults/Raritys';
-import {WeaponBaseValues} from './defaults/WeaponBaseValues';
+import {Item} from './Item';
+import {Axe} from './attackTypes/Axe';
+import {Sword} from './attackTypes/Sword';
+import {Rarity} from './ItemDefaults/Raritys';
+import {WeaponBaseValues} from './ItemDefaults/WeaponBaseValues';
 import {WeaponItem} from './ItemTypes';
 
 /**

@@ -1,4 +1,4 @@
-import {Unit} from '../Unit/Unit';
+import {Unit} from '../Unit';
 
 export class Npc extends Unit {
 

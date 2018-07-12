@@ -1,11 +1,11 @@
-import {Unit} from './Unit/Unit';
-import {Inventory} from './Inventory';
+import {Unit} from './Unit';
+import {Inventory} from '../Inventory';
 import {
     instanceOfAttackBehaviour, instanceOfDefenceBehaviour,
     instanceOfMoveBehaviour
-} from './interfaces/Behaviours/Behaviour'
-import {Item} from './Item';
-import {MovementItem, DefenceItem, WeaponItem} from './items/ItemTypes';
+} from '../items/Behaviours/Behaviour'
+import {Item} from '../items/Item';
+import {MovementItem, DefenceItem, WeaponItem} from '../items/ItemTypes';
 
 
 export class Player extends Unit {

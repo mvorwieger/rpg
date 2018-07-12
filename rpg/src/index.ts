@@ -1,16 +1,16 @@
-import {NpcFactory} from './npc/NpcFactory';
+import {NpcFactory} from './Unit/npc/NpcFactory';
 import {Battle} from './Battle';
-import {Player} from './Player';
+import {Player} from './Unit/Player';
 import {Level} from './Level';
-import {Item} from './Item';
-import {FootFactory} from './items/FootFactory';
+import {Item} from './items/Item';
+import {MovementFactory} from './items/MovementFactory';
 import {WeaponFactory} from './items/WeaponFactory';
 import {ShieldFactory} from './items/ShieldFactory';
 
 function start() {
     const PLAYER = new Player(
         WeaponFactory.createBasicSwordItem(),
-        FootFactory.createBareFeetItem(),
+        MovementFactory.createBareFeetItem(),
         ShieldFactory.createNoShieldItem()
     );
 

@@ -1,4 +1,4 @@
-import {AttackBehaviour} from '../interfaces/Behaviours/AttackBehaviour';
+import {AttackBehaviour} from '../Behaviours/AttackBehaviour';
 
 export class Axe implements AttackBehaviour {
     attackDamage: number;
