@@ -3,7 +3,7 @@ import {Inventory} from './Inventory';
 import {
     instanceOfAttackBehaviour, instanceOfDefenceBehaviour,
     instanceOfMoveBehaviour
-} from './interfaces/Behaviours/BehaviourInstanceHelper'
+} from './interfaces/Behaviours/Behaviour'
 import {Item} from './Item';
 import {MovementItem, DefenceItem, WeaponItem} from './items/ItemTypes';
 
