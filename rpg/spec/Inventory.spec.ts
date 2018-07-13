@@ -10,10 +10,10 @@ describe("Inventory::", () => {
     });
 
     it('add() should add items to the items array', function () {
-        inventory.add(mockItems[0]);
+        const item = mockItems[0]
+        inventory.add(item);
 
-        expect(inventory.items).toContain(mockItems[0]);
-        expect(inventory.items).toContain(mockItems[0]);
+        expect(inventory.items).toContain(item);
     });
 
     it('removeItem() should remove item given as Input', function () {
