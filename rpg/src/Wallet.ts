@@ -1,5 +1,4 @@
 import {Transactor} from "./Transactor";
-import {Item} from "./items/Item";
 
 export class Wallet implements Transactor {
     constructor(private moneyAmount = 0) {

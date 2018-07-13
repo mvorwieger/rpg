@@ -1,8 +1,9 @@
 import {Player} from '../Unit/Player';
 import {Npc} from '../Unit/npc/Npc';
 import {Logger} from '../log/Logger';
+import {IBattle} from './IBattle';
 
-export class Battle {
+export class Battle implements IBattle{
     private playerInBattle: Player;
     private npcInBattle: Npc;
     private playerWon: Boolean;
