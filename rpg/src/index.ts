@@ -5,6 +5,7 @@ import {Level} from './Level';
 import {MovementFactory} from './items/MovementFactory';
 import {WeaponFactory} from './items/WeaponFactory';
 import {ShieldFactory} from './items/ShieldFactory';
+const GroupBattle = require('./Battle/GroupBattle');
 
 function start() {
     const PLAYER = new Player(
@@ -16,7 +17,7 @@ function start() {
     const NPC = NpcFactory.createTroll();
     NPC.health = 1;
 
-    const battle = new Battle(PLAYER, NPC);
+    const battle = new GroupBattle(PLAYER, [NPC, NPC]);
     const reward = [WeaponFactory.createFireAxeItem()];
     const level = new Level(reward, battle);
 
