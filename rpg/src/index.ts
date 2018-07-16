@@ -1,5 +1,4 @@
 import {NpcFactory} from './Unit/npc/NpcFactory';
-import {Battle} from './Battle/Battle';
 import {Player} from './Unit/Player';
 import {Level} from './Level';
 import {MovementFactory} from './items/MovementFactory';
@@ -8,23 +7,22 @@ import {ShieldFactory} from './items/ShieldFactory';
 const GroupBattle = require('./Battle/GroupBattle');
 
 function start() {
-    const PLAYER = new Player(
+    const player = new Player(
         WeaponFactory.createBasicSwordItem(),
         MovementFactory.createBareFeetItem(),
         ShieldFactory.createNoShieldItem()
     );
 
     const NPC = NpcFactory.createTroll();
-    NPC.health = 1;
 
-    const battle = new GroupBattle(PLAYER, [NPC, NPC]);
+    const battle = new GroupBattle(player, [NPC, NPC]);
     const reward = [WeaponFactory.createFireAxeItem()];
     const level = new Level(reward, battle);
 
     level.startLevel();
-    PLAYER.moveItemsToInventory(level.claimPrize());
-    console.log(PLAYER.stats);
-    PLAYER.equipItemByRef(PLAYER.items[0]);
+    player.moveItemsToInventory(level.claimPrize());
+    console.log(player.stats);
+    player.equipItemByRef(player.items[0]);
 }
 
 start();
