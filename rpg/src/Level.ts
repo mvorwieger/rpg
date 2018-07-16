@@ -2,6 +2,7 @@ import {Item} from './items/Item';
 import {IBattle} from './Battle/IBattle';
 
 export class Level {
+    public completed: boolean = false;
     constructor(private readonly reward: Item[],
                 private battle: IBattle) {
        this.battle = battle;
@@ -12,7 +13,10 @@ export class Level {
      * Starts the Battle that was constructed with this level
      */
     public startLevel() {
-        this.battle.battle();
+        if (!this.completed){
+            this.battle.battle();
+            this.completed = true
+        }else throw Error("cannot start a level a Second time")
     }
 
     /**

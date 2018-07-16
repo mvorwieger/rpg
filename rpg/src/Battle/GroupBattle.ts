@@ -3,6 +3,10 @@ import {Npc} from '../Unit/npc/Npc';
 import {Logger} from '../log/Logger';
 import {IBattle} from './IBattle';
 
+/**
+ * Find a Fix for that so we dont need ot use module.exports and can just use export
+ * @type {{new(player: Player, npcs: Npc[]): GroupBattle; didPlayerWin: Boolean; battle: () => void; player: Player}}
+ */
 module.exports = class GroupBattle implements IBattle {
     private playerInBattle: Player;
     private npcs: Npc[];
@@ -14,7 +18,6 @@ module.exports = class GroupBattle implements IBattle {
         this.npcs = npcs;
         this.battleLog = new Logger();
     }
-
 
     /**
      * Performs the Battle until one Party is dead (in this Case either the player or all of the npcs)
