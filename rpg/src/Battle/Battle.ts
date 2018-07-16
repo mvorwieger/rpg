@@ -10,9 +10,9 @@ export class Battle implements IBattle{
     public battleLog: Logger;
 
     constructor(player: Player, npc: Npc) {
-        this.playerInBattle = player;
-        this.npcInBattle = npc;
-        this.battleLog = new Logger();
+        this.playerInBattle = Object.assign({}, player)
+        this.npcInBattle = Object.assign({}, npc)
+        this.battleLog = new Logger()
     }
 
     public battle = () => {

@@ -3,7 +3,11 @@ import {DefenceBehaviour} from './DefenceBehaviour';
 import {MoveBehaviour} from './MoveBehaviour';
 
 export type Behaviour = AttackBehaviour | DefenceBehaviour | MoveBehaviour
-
+export enum BehaviourNames {
+    AttackBehaviour = 'attack',
+    DefenceBehaviour = 'defence',
+    MoveBehaviour = 'move'
+}
 export function instanceOfAttackBehaviour(behaviour: any): behaviour is AttackBehaviour {
     return Boolean(behaviour.attack);
 }
