@@ -1,5 +1,5 @@
 import {Player} from '../../Unit/Player'
-import {ItemModel} from './MongooseModels'
+import {IItemModel, ItemModel} from './MongooseModels'
 import {AttackBehaviour} from '../../items/Behaviours/AttackBehaviour'
 import {DefenceBehaviour} from '../../items/Behaviours/DefenceBehaviour'
 import {MoveBehaviour} from '../../items/Behaviours/MoveBehaviour'
@@ -48,7 +48,7 @@ export class ModelToMongooseModelConverter {
         return undefined
     }
 
-    public static convertItem(item: Item): Promise<any> {
+    public static convertItem(item: Item){
         const model = {
             rarity: item.rarity,
             value: item.value,
@@ -61,6 +61,6 @@ export class ModelToMongooseModelConverter {
                 behaviourBlockValue: (item.behaviour as DefenceBehaviour).blockAmount
             }
         }
-        return new ItemModel(model)
+        return model
     }
 }

@@ -18,7 +18,7 @@ class ItemService {
 
     public createItemEntryInDb(item: Item): Promise<IItemModel> {
         return new Promise(((resolve, reject) => {
-            const model = ModelToMongooseModelConverter.convertItem(item)
+            const model = new ItemModel(ModelToMongooseModelConverter.convertItem(item))
             ItemModel.create(model, (err, res) => {
                 if (err) {
                     reject(err)
