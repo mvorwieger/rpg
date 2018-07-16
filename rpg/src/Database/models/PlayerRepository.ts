@@ -5,7 +5,6 @@ import {ModelToMongooseModelConverter} from './ModelToMongooseModelConverter'
 
 export class PlayerRepository {
     public id: any
-    public Player: any = PlayerModel
 
     constructor(playerId?: any) {
         this.id = playerId
