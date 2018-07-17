@@ -1,16 +1,8 @@
-import {NpcFactory} from './Unit/npc/NpcFactory'
 import {Player} from './Unit/Player'
-import {Level} from './Level'
 import {MovementFactory} from './items/MovementFactory'
 import {WeaponFactory} from './items/WeaponFactory'
 import {ShieldFactory} from './items/ShieldFactory'
-
 import {PlayerRepository} from './Database/models/PlayerRepository'
-
-import {Battle} from './Battle/Battle'
-import {ModelToMongooseModelConverter} from './Database/models/ItemIdService'
-import {itemService} from './Database/models/ItemService'
-import {Document} from 'mongoose'
 
 const mongoose = require('mongoose')
 
@@ -31,6 +23,14 @@ function start() {
      * @type {PlayerRepository}
      */
     const playerRepository = new PlayerRepository()
+    const test = async() => {
+        await playerRepository.createPlayer(player)
+        player.wallet.add(124190284)
+        await playerRepository.updatePlayer(player)
+        const updatedPlayer = await playerRepository.getPlayer()
+        console.log(updatedPlayer)
+    }
+    test()
 }
 
 start()

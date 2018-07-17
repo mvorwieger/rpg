@@ -1,7 +1,6 @@
-import {Connection} from 'mongoose'
 import {Player} from '../../Unit/Player'
 import {IPlayerModel, PlayerModel} from './MongooseModels'
-import {ModelToMongooseModelConverter} from './ItemIdService'
+import {itemIdService} from './ItemIdService'
 
 export class PlayerRepository {
     public id: any
@@ -10,9 +9,16 @@ export class PlayerRepository {
         this.id = playerId
     }
 
-    updatePlayer(player: Player): any {
+    public getPlayer() {
         return new Promise((resolve, reject) => {
-            ModelToMongooseModelConverter.convertPlayer(player)
+            PlayerModel.findById(this.id)
+                .then(doc => resolve(doc))
+                .catch(err => reject(err))
+        })
+    }
+    public updatePlayer(player: Player): any {
+        return new Promise((resolve, reject) => {
+            itemIdService.convertPlayer(player)
                 .then(convertedPlayer => {
                     PlayerModel
                         .findById(this.id)
@@ -26,7 +32,7 @@ export class PlayerRepository {
 
     public createPlayer(player: Player): Promise<IPlayerModel> {
         return new Promise((resolve, reject) => {
-            ModelToMongooseModelConverter.convertPlayer(player)
+            itemIdService.convertPlayer(player)
                 .then((convertedPlayer: Player) => {
                     PlayerModel.create(new PlayerModel(convertedPlayer))
                         .then(doc => {
