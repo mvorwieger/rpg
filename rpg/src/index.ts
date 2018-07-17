@@ -8,7 +8,7 @@ import {ShieldFactory} from './items/ShieldFactory'
 import {PlayerRepository} from './Database/models/PlayerRepository'
 
 import {Battle} from './Battle/Battle'
-import {ModelToMongooseModelConverter} from './Database/models/ModelToMongooseModelConverter'
+import {ModelToMongooseModelConverter} from './Database/models/ItemIdService'
 import {itemService} from './Database/models/ItemService'
 import {Document} from 'mongoose'
 
@@ -31,9 +31,6 @@ function start() {
      * @type {PlayerRepository}
      */
     const playerRepository = new PlayerRepository()
-    playerRepository.createPlayer(player).then((doc: Document) => {
-        console.log(doc)
-    })
 }
 
 start()

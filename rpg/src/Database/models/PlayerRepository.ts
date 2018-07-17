@@ -1,7 +1,7 @@
 import {Connection} from 'mongoose'
 import {Player} from '../../Unit/Player'
 import {IPlayerModel, PlayerModel} from './MongooseModels'
-import {ModelToMongooseModelConverter} from './ModelToMongooseModelConverter'
+import {ModelToMongooseModelConverter} from './ItemIdService'
 
 export class PlayerRepository {
     public id: any
@@ -10,7 +10,7 @@ export class PlayerRepository {
         this.id = playerId
     }
 
-    updatePlayer(player: Player): Promise<IPlayerModel> {
+    updatePlayer(player: Player): any {
         return new Promise((resolve, reject) => {
             ModelToMongooseModelConverter.convertPlayer(player)
                 .then(convertedPlayer => {
