@@ -1,13 +1,13 @@
-import {Player} from '../../Unit/Player'
+import {Player} from '../Unit/Player'
 import {IItemModel, ItemModel} from './MongooseModels'
-import {AttackBehaviour} from '../../items/Behaviours/AttackBehaviour'
-import {DefenceBehaviour} from '../../items/Behaviours/DefenceBehaviour'
-import {MoveBehaviour} from '../../items/Behaviours/MoveBehaviour'
-import {Item} from '../../items/Item'
+import {AttackBehaviour} from '../items/Behaviours/AttackBehaviour'
+import {DefenceBehaviour} from '../items/Behaviours/DefenceBehaviour'
+import {MoveBehaviour} from '../items/Behaviours/MoveBehaviour'
+import {Item} from '../items/Item'
 import {
     Behaviour, BehaviourNames, instanceOfAttackBehaviour, instanceOfDefenceBehaviour,
     instanceOfMoveBehaviour
-} from '../../items/Behaviours/Behaviour'
+} from '../items/Behaviours/Behaviour'
 import {itemService} from './ItemService'
 import {Document} from 'mongoose'
 

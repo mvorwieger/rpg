@@ -5,10 +5,13 @@ export class Wallet implements Transactor {
         this.moneyAmount = moneyAmount
     }
 
+    /**
+     * Gives u the money Amount of the wallet
+     * @return {number | undefined}
+     */
     public get money() {
         return this.moneyAmount
     }
-
     /**
      * Adds money to the existing money
      * @param {number} amount

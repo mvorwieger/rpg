@@ -1,4 +1,4 @@
-import {Item} from '../../items/Item'
+import {Item} from '../items/Item'
 import {IItemModel, ItemModel} from './MongooseModels'
 import {itemIdService} from './ItemIdService'
 

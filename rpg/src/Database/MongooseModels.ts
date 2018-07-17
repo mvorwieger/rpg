@@ -1,5 +1,5 @@
 import {Model, Schema, Document} from 'mongoose'
-import {BehaviourNames} from '../../items/Behaviours/Behaviour'
+import {BehaviourNames} from '../items/Behaviours/Behaviour'
 const mongoose = require('mongoose')
 
 export var UnitSchema: Schema = new Schema({

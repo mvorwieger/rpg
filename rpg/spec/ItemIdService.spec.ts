@@ -1,5 +1,5 @@
 import "jasmine"
-import {itemIdService} from '../src/Database/models/ItemIdService'
+import {itemIdService} from '../src/Database/ItemIdService'
 import {Player} from '../src/Unit/Player'
 import {WeaponFactory} from '../src/items/WeaponFactory'
 import {MovementFactory} from '../src/items/MovementFactory'

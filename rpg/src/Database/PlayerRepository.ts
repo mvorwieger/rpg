@@ -1,4 +1,4 @@
-import {Player} from '../../Unit/Player'
+import {Player} from '../Unit/Player'
 import {IPlayerModel, PlayerModel} from './MongooseModels'
 import {itemIdService} from './ItemIdService'
 
