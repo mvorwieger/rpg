@@ -1,8 +1,12 @@
 import {User} from "../Database/UserModel"
+import {Player} from '../Unit/Player'
+import {ItemIdService} from '../Database/ItemIdService'
+import {PlayerModel} from '../Database/MongooseModels'
+import {PlayerRepository} from '../Database/PlayerRepository'
 
 export class UserService {
-    constructor() {
-
+    constructor(private playerRepository: PlayerRepository) {
+        this.playerRepository = playerRepository
     }
 
     async login(username: string, password: string): Promise<boolean> {
@@ -32,6 +36,22 @@ export class UserService {
         }
     }
 
-    isLoggedInMiddleware(res: Response, req: Request) {
+    async createPlayerForUser(username: string, player: Player) {
+        console.log(username)
+        const playerModel = await this.playerRepository.createPlayer(player)
+        const userModel = await User.findOne({username})
+        userModel.characters.push(playerModel._id)
+        await userModel.save()
+        return userModel
+    }
+
+    async profileInformation(username: string): Promise<any> {
+        return await User.findOne({username})
+    }
+
+    async getCharacters(username: string): Promise<any> {
+        const userModel = await User.findOne({username})
+        const PromiseCharacters = userModel.characters.map(id => this.playerRepository.getPlayer(id))
+        return await Promise.all(PromiseCharacters)
     }
 }

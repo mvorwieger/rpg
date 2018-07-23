@@ -1,24 +1,26 @@
 import {Player} from '../Unit/Player'
 import {IPlayerModel, PlayerModel} from './MongooseModels'
-import {itemIdService} from './ItemIdService'
+import {ItemIdService} from './ItemIdService'
 
 export class PlayerRepository {
     public id: any
 
-    constructor(playerId?: any) {
+    constructor(private itemIdService: ItemIdService, playerId?: any) {
         this.id = playerId
+        this.itemIdService = itemIdService
     }
 
-    public getPlayer() {
+    public getPlayer(id?: string) {
+        const usedId = Boolean(id) ? id : this.id
         return new Promise((resolve, reject) => {
-            PlayerModel.findById(this.id)
+            PlayerModel.findById(usedId)
                 .then(doc => resolve(doc))
                 .catch(err => reject(err))
         })
     }
     public updatePlayer(player: Player): any {
         return new Promise((resolve, reject) => {
-            itemIdService.convertPlayer(player)
+            this.itemIdService.convertPlayer(player)
                 .then(convertedPlayer => {
                     PlayerModel
                         .findById(this.id)
@@ -32,7 +34,7 @@ export class PlayerRepository {
 
     public createPlayer(player: Player): Promise<IPlayerModel> {
         return new Promise((resolve, reject) => {
-            itemIdService.convertPlayer(player)
+            this.itemIdService.convertPlayer(player)
                 .then((convertedPlayer: Player) => {
                     PlayerModel.create(new PlayerModel(convertedPlayer))
                         .then(doc => {

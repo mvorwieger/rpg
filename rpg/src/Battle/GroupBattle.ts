@@ -14,8 +14,8 @@ module.exports = class GroupBattle implements IBattle {
     public battleLog: Logger;
 
     constructor(player: Player, npcs: Npc[]) {
-        this.playerInBattle = player;
-        this.npcs = npcs;
+        this.playerInBattle = Object.assign({}, player);
+        this.npcs = npcs.map((npc) => Object.assign({}, npc));
         this.battleLog = new Logger();
     }
 

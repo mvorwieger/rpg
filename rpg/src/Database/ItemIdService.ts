@@ -1,5 +1,4 @@
 import {Player} from '../Unit/Player'
-import {IItemModel, ItemModel} from './MongooseModels'
 import {AttackBehaviour} from '../items/Behaviours/AttackBehaviour'
 import {DefenceBehaviour} from '../items/Behaviours/DefenceBehaviour'
 import {MoveBehaviour} from '../items/Behaviours/MoveBehaviour'
@@ -8,12 +7,13 @@ import {
     Behaviour, BehaviourNames, instanceOfAttackBehaviour, instanceOfDefenceBehaviour,
     instanceOfMoveBehaviour
 } from '../items/Behaviours/Behaviour'
-import {itemService} from './ItemService'
 import {Document} from 'mongoose'
+import {ItemService} from './ItemService'
 
-class ItemIdService {
-    constructor(public itemService) {
-        this.itemService = itemService
+export class ItemIdService {
+    private itemService: ItemService
+    constructor() {
+        this.itemService = new ItemService(this)
     }
 
     public convertPlayer = (player: Player): Promise<any> => {
@@ -63,5 +63,3 @@ class ItemIdService {
         }
     }
 }
-
-export const itemIdService = new ItemIdService(itemService)

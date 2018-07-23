@@ -1,11 +1,14 @@
 import {Item} from '../items/Item'
 import {IItemModel, ItemModel} from './MongooseModels'
-import {itemIdService} from './ItemIdService'
+import {ItemIdService} from './ItemIdService'
 
-class ItemService {
+export class ItemService {
+    constructor(private itemIdService: ItemIdService) {
+        this.itemIdService = itemIdService
+    }
     public getIdOfItemInDatabase(item: Item): Promise<IItemModel> {
         return new Promise((resolve, reject) => {
-            ItemModel.findOne({name: itemIdService.convertItem(item).name})
+            ItemModel.findOne({name: item.name})
                 .then(doc => resolve(doc._id))
                 .catch(err => reject(err))
         })
@@ -13,12 +16,18 @@ class ItemService {
 
     public createItemEntryInDb(item: Item): Promise<IItemModel> {
         return new Promise((resolve, reject) => {
-            const model = new ItemModel(itemIdService.convertItem(item))
+            const model = new ItemModel(this.itemIdService.convertItem(item))
             ItemModel.create(model)
                 .then(docs => resolve(docs))
                 .catch(err => reject(err))
         })
     }
-}
 
-export const itemService = new ItemService()
+    public async getAllItems() {
+        return await ItemModel.find()
+    }
+
+    public async getItemById(id: string) {
+        return await ItemModel.findById(id)
+    }
+}
