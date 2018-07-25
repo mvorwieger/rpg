@@ -33,8 +33,6 @@ export class JwtService {
 
         this.verifyJwt(token).then(decoded => {
             req.token = decoded
-            console.log(req.token)
-            console.log(decoded)
             next()
         }).catch(() => res.status(401).send('Unauthorized'))
     }

@@ -36,7 +36,6 @@ export class UserService {
     async createPlayerForUser(username: string, player: Player) {
         const playerModel = await this.playerRepository.add(player)
         const userModel = await User.findOne({username})
-        console.log(playerModel._id)
         userModel.characters.push(playerModel._id)
         await userModel.save()
         return userModel
