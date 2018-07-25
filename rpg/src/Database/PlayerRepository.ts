@@ -7,26 +7,20 @@ import {Inject} from 'typescript-ioc'
 export class PlayerRepository {
     public playerId: string
 
-    constructor(@Inject private itemService: ItemService) {
-    }
-
+    constructor(@Inject private itemService: ItemService) { }
     /**
      * used to find a player By Id
      * @param {string} id
      * @returns {Promise<any>}
      */
-    public find(id?: string): Promise<IPlayerModel> {
+    public find  = (id?: string): Promise<IPlayerModel> =>{
         const usedId = Boolean(id) ? id : this.playerId
-        return new Promise((resolve, reject) => {
-            PlayerModel.findById(usedId)
-                .populate('equippedWeaponItemId')
-                .populate('equippedDefenceItemId')
-                .populate('equippedMovementItemId')
-                .populate('inventoryItemIds')
-                .exec()
-                .then(doc => resolve(doc))
-                .catch(err => reject(err))
-        })
+        return PlayerModel.findById(usedId)
+            .populate('equippedWeaponItemId')
+            .populate('equippedDefenceItemId')
+            .populate('equippedMovementItemId')
+            .populate('inventoryItemIds')
+            .exec()
     }
 
     /**
@@ -36,19 +30,12 @@ export class PlayerRepository {
      * @param playerId
      * @returns {number} Updated Rows
      */
-    public replace(player: Player, playerId?): Promise<number> {
+    public replace= async (player: Player, playerId?): Promise<number> => {
         const id = playerId ? playerId : this.playerId
-        return new Promise((resolve, reject) => {
-            this.convertPlayerToSchema(player)
-                .then(convertedPlayer => {
-                    PlayerModel
-                        .findById(this.playerId)
-                        .update(convertedPlayer)
-                        .then(doc => resolve(doc))
-                        .catch(err => reject(err))
-                })
-                .catch(err => reject(err))
-        })
+        const convertedPlayer  = this.convertPlayerToSchema(player)
+        return PlayerModel
+            .findById(this.playerId)
+            .update(convertedPlayer)
     }
 
     /**
@@ -57,9 +44,9 @@ export class PlayerRepository {
      * @param {Player} player
      * @returns {Promise<IPlayerModel>}
      */
-    public add = async(player: Player): Promise<any> => {
+    public add = async (player: Player): Promise<any> => {
         const convertedPlayer = await this.convertPlayerToSchema(player)
-        return await PlayerModel.create(convertedPlayer)
+        return PlayerModel.create(convertedPlayer)
     }
 
     /**
