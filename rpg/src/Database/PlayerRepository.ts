@@ -1,10 +1,14 @@
 import {Player} from '../Unit/Player'
 import {IPlayerModel, PlayerModel} from './models/PlayerModel'
-import {Document} from "mongoose"
+import {Document, default as mongoose} from "mongoose"
 import {ItemService} from './services/ItemService'
+import {Inject} from 'typescript-ioc'
 
 export class PlayerRepository {
-    constructor(private itemService: ItemService, public playerId?: any) { }
+    public playerId: string
+
+    constructor(@Inject private itemService: ItemService) {
+    }
 
     /**
      * used to find a player By Id
@@ -15,6 +19,11 @@ export class PlayerRepository {
         const usedId = Boolean(id) ? id : this.playerId
         return new Promise((resolve, reject) => {
             PlayerModel.findById(usedId)
+                .populate('equippedWeaponItemId')
+                .populate('equippedDefenceItemId')
+                .populate('equippedMovementItemId')
+                .populate('inventoryItemIds')
+                .exec()
                 .then(doc => resolve(doc))
                 .catch(err => reject(err))
         })
@@ -48,35 +57,29 @@ export class PlayerRepository {
      * @param {Player} player
      * @returns {Promise<IPlayerModel>}
      */
-    public add = (player: Player): Promise<IPlayerModel> => PlayerModel.create(new PlayerModel(this.convertPlayerToSchema(player)))
+    public add = async(player: Player): Promise<any> => {
+        const convertedPlayer = await this.convertPlayerToSchema(player)
+        return await PlayerModel.create(convertedPlayer)
+    }
 
     /**
      * Used to convert the Player Class to the schema used in the Database
      * @param {Player} player
      * @returns {Promise<{}>}
      */
-    private convertPlayerToSchema = (player: Player): Promise<any> => {
-        return new Promise((resolve, reject) => {
-            // create Promises
-            const PromiseEquippedWeaponItem = this.itemService.findId(player.equippedItemList.weapon)
-            const PromiseEquippedMovementItem = this.itemService.findId(player.equippedItemList.foot)
-            const PromiseEquippedDefenceItem = this.itemService.findId(player.equippedItemList.shield)
-            const PromiseInventory = player.items.map(this.itemService.findId)
+    public convertPlayerToSchema = async (player: Player): Promise<any> => {
+        const equippedWeaponItemId = await this.itemService.findId(player.equippedItemList.weapon)
+        const equippedMovementItemId = await this.itemService.findId(player.equippedItemList.foot)
+        const equippedDefenceItemId = await this.itemService.findId(player.equippedItemList.shield)
+        const inventoryItemIds = player.items.map(async d => await this.itemService.findId(d))
 
-            Promise.all([PromiseEquippedWeaponItem, PromiseEquippedMovementItem, PromiseEquippedDefenceItem, ...PromiseInventory])
-                .then((res: Document[]) => {
-                    // Gather Results
-                    const [equippedWeaponItemId, equippedMovementItemId, equippedDefenceItemId, ...inventoryItemIds] = res
-
-                    resolve({
-                        health: player.health,
-                        inventoryItemIds,
-                        equippedWeaponItemId,
-                        equippedMovementItemId,
-                        equippedDefenceItemId,
-                        walletMoney: player.wallet.money
-                    })
-                }).catch((err) => reject('couldnt fetch item ids: ' + err))
+        return ({
+            health: player.health,
+            inventoryItemIds,
+            equippedWeaponItemId,
+            equippedMovementItemId,
+            equippedDefenceItemId,
+            walletMoney: player.wallet.money
         })
     }
 }

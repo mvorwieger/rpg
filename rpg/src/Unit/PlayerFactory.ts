@@ -5,7 +5,7 @@ import {Player} from './Player'
 
 export class PlayerFactory {
     public static createBasicPlayer = () => new Player(
-        WeaponFactory.createNoWeapon(),
+        WeaponFactory.createBasicSwordItem(),
         MovementFactory.createBareFeetItem(),
         ShieldFactory.createNoShieldItem()
     )

@@ -1,11 +1,10 @@
 import {User} from "../models/UserModel"
 import {Player} from '../../Unit/Player'
 import {PlayerRepository} from '../PlayerRepository'
+import {Inject} from 'typescript-ioc'
 
 export class UserService {
-    constructor(private playerRepository: PlayerRepository) {
-        this.playerRepository = playerRepository
-    }
+    constructor(@Inject private playerRepository: PlayerRepository) { }
 
     async login(username: string, password: string): Promise<boolean> {
         let  user
@@ -35,9 +34,9 @@ export class UserService {
     }
 
     async createPlayerForUser(username: string, player: Player) {
-        console.log(username)
         const playerModel = await this.playerRepository.add(player)
         const userModel = await User.findOne({username})
+        console.log(playerModel._id)
         userModel.characters.push(playerModel._id)
         await userModel.save()
         return userModel
@@ -49,7 +48,7 @@ export class UserService {
 
     async getCharacters(username: string): Promise<any> {
         const userModel = await User.findOne({username})
-        const PromiseCharacters = userModel.characters.map(id => this.playerRepository.add(id))
+        const PromiseCharacters = userModel.characters.map(id => this.playerRepository.find(id))
         return await Promise.all(PromiseCharacters)
     }
 }
