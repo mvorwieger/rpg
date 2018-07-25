@@ -6,16 +6,24 @@ import {DefenceBehaviour} from '../../items/Behaviours/DefenceBehaviour'
 import {getBehaviourType} from '../../items/Behaviours/Behaviour'
 
 export class ItemService {
-    constructor() { }
-    public getIdOfItemInDatabase(item: Item): Promise<IItemModel> {
+    /**
+     * gives you the items id if it can find the Item in the Database
+     * @param {Item} item
+     * @returns {Promise<IItemModel>}
+     */
+    public findId = (item: Item): Promise<IItemModel> => {
         return new Promise((resolve, reject) => {
             ItemModel.findOne({name: item.name})
                 .then(doc => resolve(doc._id))
                 .catch(err => reject(err))
         })
     }
-
-    public createItemEntryInDb(item: Item): Promise<IItemModel> {
+    /**
+     * Adds an item To the mongo Database
+     * @param {Item} item
+     * @returns {Promise<IItemModel>}
+     */
+    public addItem = (item: Item): Promise<IItemModel> => {
         return new Promise((resolve, reject) => {
             const model = new ItemModel(this.convertItem(item))
             ItemModel.create(model)
@@ -23,8 +31,12 @@ export class ItemService {
                 .catch(err => reject(err))
         })
     }
-
-    public convertItem(item: Item) {
+    /**
+     * converts the Item class to the mongoose schema
+     * @param {Item} item
+     * @returns {} ItemSchema For Mongoose
+     */
+    public convertItem = (item: Item) => {
         return {
             rarity: item.rarity,
             value: item.value,
@@ -38,12 +50,16 @@ export class ItemService {
             }
         }
     }
+    /**
+     * Returns all items in the Database
+     * @returns {Promise<{}[]>}
+     */
+    public getAllItems = async () => await ItemModel.find()
+    /**
+     * Finds item by id
+     * @param {string} id
+     * @returns {Promise<{}>}
+     */
+    public findById = async (id: string) => await ItemModel.findById(id)
 
-    public async getAllItems() {
-        return await ItemModel.find()
-    }
-
-    public async getItemById(id: string) {
-        return await ItemModel.findById(id)
-    }
 }

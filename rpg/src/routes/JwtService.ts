@@ -1,8 +1,6 @@
 const jwt = require('jsonwebtoken')
 export class JwtService {
-    constructor(private privateKey) {
-        this.privateKey = privateKey
-    }
+    constructor(private privateKey) { }
 
     createJwt(payLoad) {
         return new Promise((resolve, reject) => {

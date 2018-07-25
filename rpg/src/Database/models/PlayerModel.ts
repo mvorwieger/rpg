@@ -1,7 +1,4 @@
 import {Document, Model, Schema} from "mongoose"
-import {ItemService} from '../services/ItemService'
-import {ItemIdService} from '../services/ItemIdService'
-import {Item} from '../../items/Item'
 const mongoose = require('mongoose')
 
 export var PlayerSchema: Schema = new Schema({

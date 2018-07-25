@@ -1,16 +1,12 @@
 import {ItemService} from '../Database/services/ItemService'
 
 export class ItemController {
-    constructor(private itemServcice: ItemService) {
-        this.itemServcice = itemServcice
-    }
+    constructor(private itemServcice: ItemService) { }
 
-    async getItemById(req, res) {
+    public getItemById = async(req, res) => {
         const id = req.params.id
-        res.status(200).send(await this.itemServcice.getItemById(id))
+        res.status(200).send(await this.itemServcice.findById(id))
     }
 
-    async getItems(req, res) {
-        return await this.itemServcice.getAllItems()
-    }
+    public getItems = async(req, res) => await this.itemServcice.getAllItems()
 }

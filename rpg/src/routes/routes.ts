@@ -4,6 +4,7 @@ import {UserController} from '../controllers/UserController'
 import {PlayerRepository} from '../Database/PlayerRepository'
 import {ItemService} from '../Database/services/ItemService'
 import {ItemController} from '../controllers/ItemController'
+import {UserService} from '../Database/services/UserService'
 
 
 const express = require('express')
@@ -33,7 +34,8 @@ const privateKey = readFileSync('./jwtRS256.key')
 const jwtService = new JwtService(privateKey)
 const itemService = new ItemService()
 const playerRepository = new PlayerRepository(itemService)
-const userController = new UserController(jwtService, playerRepository)
+const userService = new UserService(playerRepository)
+const userController = new UserController(jwtService, userService)
 const itemController = new ItemController(itemService)
 
 app.post('/login', userController.login)

@@ -8,18 +8,9 @@ import {ShieldFactory} from '../items/ShieldFactory'
 import {PlayerFactory} from '../Unit/PlayerFactory'
 
 export class UserController {
-    private userService: UserService
+    constructor(private jwtService: JwtService, private userService: UserService) { }
 
-    constructor(
-        private jwtService: JwtService,
-        private playerRepository: PlayerRepository
-    ) {
-        this.jwtService = jwtService
-        this.userService = new UserService(playerRepository)
-        this.playerRepository = playerRepository
-    }
-
-    login = (req, res) => {
+    public login = (req, res) => {
         const user = {
             username: req.body.username,
             password: req.body.password
@@ -36,7 +27,7 @@ export class UserController {
         })
     }
 
-    register = (req, res) => {
+    public register = (req, res) => {
         const user = {
             username: req.body.username,
             password: req.body.password
@@ -53,7 +44,7 @@ export class UserController {
             })
     }
 
-    profileInformation = (req, res) => {
+    public profileInformation = (req, res) => {
         this.userService.profileInformation(req.token.username)
             .then(r => {
                 const strippedUserModel = {
@@ -65,14 +56,14 @@ export class UserController {
             })
     }
 
-    addPlayerToUser = (req, res) => {
+    public addPlayerToUser = (req, res) => {
         const newPlayer = PlayerFactory.createBasicPlayer()
 
         this.userService.createPlayerForUser(req.token.username, newPlayer)
             .then((user) => res.status(200).send(user))
     }
 
-    getCharacters = (req, res) => {
+    public getCharacters = (req, res) => {
         this.userService.getCharacters(req.token.username)
             .then(chars => res.status(200).send(chars))
     }

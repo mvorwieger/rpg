@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "babel src --out-dir lib --extensions \".ts,.tsx\"",
+    "build": "tsc -p tsconfig.json",
     "type-check": "tsc --noEmit",
     "server": "npm run build && node lib/routes/routes.js",
     "start": "npm run build && node lib/index.js",
