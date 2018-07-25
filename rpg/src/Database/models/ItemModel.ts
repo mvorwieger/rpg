@@ -1,22 +1,6 @@
 import {Model, Schema, Document} from 'mongoose'
-import {BehaviourNames} from '../items/Behaviours/Behaviour'
+import {BehaviourNames} from '../../items/Behaviours/Behaviour'
 const mongoose = require('mongoose')
-
-export var UnitSchema: Schema = new Schema({
-    health: Number,
-    moveBehaviourId: Number,
-    attackBehaviourId: Number,
-    defenceBehaviourId: Number,
-})
-
-export var PlayerSchema: Schema = new Schema({
-    health: Number,
-    inventoryItemIds: [String],
-    equippedWeaponItemId: String,
-    equippedMovementItemId: String,
-    equippedDefenceItemId: String,
-    walletMoney: Number,
-})
 
 export var ItemSchema: Schema = new Schema({
     rarity: String,
@@ -53,11 +37,8 @@ export var ItemSchema: Schema = new Schema({
     }
 })
 
-export interface IPlayerModel extends Document {
-}
-
 export interface IItemModel extends Document {
 }
 
 export const ItemModel: Model<any> = mongoose.model('Item', ItemSchema)
-export const PlayerModel: Model<IPlayerModel> = mongoose.model('Player', PlayerSchema)
+

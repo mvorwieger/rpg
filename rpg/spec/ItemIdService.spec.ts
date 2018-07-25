@@ -1,12 +1,12 @@
 import "jasmine"
-import {itemIdService} from '../src/Database/ItemIdService'
+import {itemIdService} from '../src/Database/services/ItemIdService'
 import {Player} from '../src/Unit/Player'
 import {WeaponFactory} from '../src/items/WeaponFactory'
 import {MovementFactory} from '../src/items/MovementFactory'
 import {ShieldFactory} from '../src/items/ShieldFactory'
 
 const mockId = 'SomeId'
-itemIdService.itemService.getIdOfItemInDatabase = async() => mockId
+itemIdService.itemService.findId = async() => mockId
 
 describe('ModelToMongooseModelConverter::', () => {
     describe('convertPlayer()', () => {
