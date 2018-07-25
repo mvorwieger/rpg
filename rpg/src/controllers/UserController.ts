@@ -1,4 +1,4 @@
-import {UserService} from '../routes/UserService'
+import {UserService} from '../Database/services/UserService'
 import {JwtService} from '../routes/JwtService'
 import {PlayerRepository} from '../Database/PlayerRepository'
 import {Player} from '../Unit/Player'

@@ -1,15 +1,10 @@
-import {UserService} from './UserService'
 import {JwtService} from './JwtService'
-import * as fs from "fs"
 import {readFileSync} from 'fs'
 import {UserController} from '../controllers/UserController'
 import {PlayerRepository} from '../Database/PlayerRepository'
-import {ItemService} from '../Database/ItemService'
-import {ItemIdService} from '../Database/ItemIdService'
-import {WeaponFactory} from '../items/WeaponFactory'
-import {MovementFactory} from '../items/MovementFactory'
-import {ShieldFactory} from '../items/ShieldFactory'
+import {ItemService} from '../Database/services/ItemService'
 import {ItemController} from '../controllers/ItemController'
+
 
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -36,11 +31,11 @@ const authenticateJwt = (req, res, next) => {
 // TODO: move dependencies out of Router
 const privateKey = readFileSync('./jwtRS256.key')
 const jwtService = new JwtService(privateKey)
-const itemIdService = new ItemIdService()
-const itemService = new ItemService(itemIdService)
-const playerRepository = new PlayerRepository(new ItemIdService())
+const itemService = new ItemService()
+const playerRepository = new PlayerRepository(itemService)
 const userController = new UserController(jwtService, playerRepository)
-const itemController = new ItemController();
+const itemController = new ItemController(itemService)
+
 app.post('/login', userController.login)
 
 app.post('/register', userController.register)

@@ -1,4 +1,4 @@
-import {ItemService} from '../Database/ItemService'
+import {ItemService} from '../Database/services/ItemService'
 
 export class ItemController {
     constructor(private itemServcice: ItemService) {

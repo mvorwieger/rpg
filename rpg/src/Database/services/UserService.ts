@@ -1,8 +1,8 @@
-import {User} from "../Database/UserModel"
-import {Player} from '../Unit/Player'
-import {ItemIdService} from '../Database/ItemIdService'
-import {PlayerModel} from '../Database/MongooseModels'
-import {PlayerRepository} from '../Database/PlayerRepository'
+import {User} from "../models/UserModel"
+import {Player} from '../../Unit/Player'
+import {ItemIdService} from './ItemIdService'
+import {PlayerModel} from '../models/ItemModel'
+import {PlayerRepository} from '../PlayerRepository'
 
 export class UserService {
     constructor(private playerRepository: PlayerRepository) {

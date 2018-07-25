@@ -19,3 +19,10 @@ export function instanceOfDefenceBehaviour(behaviour: any): behaviour is Defence
 export function instanceOfMoveBehaviour(behaviour: any): behaviour is MoveBehaviour {
     return Boolean(behaviour.move);
 }
+
+export function getBehaviourType(behaviour: Behaviour): String {
+    if (instanceOfAttackBehaviour(behaviour)) return BehaviourNames.AttackBehaviour
+    if (instanceOfDefenceBehaviour(behaviour)) return BehaviourNames.DefenceBehaviour
+    if (instanceOfMoveBehaviour(behaviour)) return BehaviourNames.MoveBehaviour
+    return undefined
+}

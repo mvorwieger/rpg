@@ -37,8 +37,8 @@ export class Player extends Unit {
     }
 
     /**
-     * gives us the list of players equipped items
-     * @return {{weapon: WeaponItem; foot: MovementItem; shield: DefenceItem}}
+     *
+     * @returns {{weapon: WeaponItem; foot: MovementItem; shield: DefenceItem}}
      */
     public get equippedItemList() {
         return this.equippedItems
