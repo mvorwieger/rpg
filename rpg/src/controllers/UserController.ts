@@ -1,14 +1,10 @@
 import {UserService} from '../Database/services/UserService'
 import {JwtService} from '../routes/JwtService'
-import {PlayerRepository} from '../Database/PlayerRepository'
-import {Player} from '../Unit/Player'
-import {WeaponFactory} from '../items/WeaponFactory'
-import {MovementFactory} from '../items/MovementFactory'
-import {ShieldFactory} from '../items/ShieldFactory'
 import {PlayerFactory} from '../Unit/PlayerFactory'
+import {Inject} from 'typescript-ioc'
 
 export class UserController {
-    constructor(private jwtService: JwtService, private userService: UserService) { }
+    constructor(@Inject private jwtService: JwtService, @Inject private userService: UserService) { }
 
     public login = (req, res) => {
         const user = {

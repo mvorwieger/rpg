@@ -11,7 +11,7 @@ export class ItemService {
      * @param {Item} item
      * @returns {Promise<IItemModel>}
      */
-    public findId = (item: Item): Promise<IItemModel> => {
+    public findId = (item: Item): Promise<any> => {
         return new Promise((resolve, reject) => {
             ItemModel.findOne({name: item.name})
                 .then(doc => resolve(doc._id))

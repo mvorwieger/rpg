@@ -1,7 +1,8 @@
 import {ItemService} from '../Database/services/ItemService'
+import {Inject} from 'typescript-ioc'
 
 export class ItemController {
-    constructor(private itemServcice: ItemService) { }
+    constructor(@Inject private itemServcice: ItemService) { }
 
     public getItemById = async(req, res) => {
         const id = req.params.id
