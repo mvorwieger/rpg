@@ -1,7 +1,7 @@
 import {Item} from './items/Item';
 
 export class Inventory {
-    private inventoryItems: Item[] = [];
+    constructor(private inventoryItems: Item[] = []) {}
 
     /**
      * Searched Items in the Inventory Array by name<string>

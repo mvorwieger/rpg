@@ -1,5 +1,4 @@
 import {readFileSync} from 'fs'
-
 const jwt = require('jsonwebtoken')
 
 export class JwtService {

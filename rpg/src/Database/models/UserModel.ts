@@ -6,7 +6,7 @@ const mongoose = require('mongoose'),
 const UserSchema = new Schema({
     username: {type: String, required: true, index: {unique: true}},
     password: {type: String, required: true},
-    characters: {type: [String], default: []}
+    characters: {type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Player'}], default: []}
 })
 
 UserSchema.pre('save', function (next) {

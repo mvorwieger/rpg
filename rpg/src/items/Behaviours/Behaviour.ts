@@ -2,7 +2,12 @@ import {AttackBehaviour} from './AttackBehaviour';
 import {DefenceBehaviour} from './DefenceBehaviour';
 import {MoveBehaviour} from './MoveBehaviour';
 
-export type Behaviour = AttackBehaviour | DefenceBehaviour | MoveBehaviour
+export interface Behaviour {
+    moveSpeed?: number,
+    attackDamage?: number,
+    blockValue?: number,
+    blockPercentage?: number
+}
 export enum BehaviourNames {
     AttackBehaviour = 'attack',
     DefenceBehaviour = 'defence',
