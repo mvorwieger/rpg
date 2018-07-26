@@ -1,7 +1,7 @@
 import {Document, Model, Schema, Types} from "mongoose"
 const mongoose = require('mongoose')
 
-const PlayerSchema: Schema = new Schema({
+const RaceSchema: Schema = new Schema({
     health: Number,
     inventory: [{type: mongoose.Schema.Types.ObjectId, ref: 'Item'}],
     weapon: {type: mongoose.Schema.Types.ObjectId, ref: 'Item', require: true},
@@ -10,7 +10,4 @@ const PlayerSchema: Schema = new Schema({
     money: Number,
 })
 
-export const PlayerModel: any = mongoose.model('Player', PlayerSchema)
-
-export interface IPlayerModel extends Document {
-}
+export const PlayerModel: any = mongoose.model('Race', RaceSchema)

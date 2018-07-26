@@ -1,8 +1,9 @@
 import {Model, Schema, Document} from 'mongoose'
 import {BehaviourNames} from '../../items/Behaviours/Behaviour'
+
 const mongoose = require('mongoose')
 
-export var ItemSchema: Schema = new Schema({
+const ItemSchema: Schema = new Schema({
     rarity: String,
     value: Number,
     name: {
@@ -38,7 +39,17 @@ export var ItemSchema: Schema = new Schema({
 })
 
 export interface IItemModel extends Document {
+    rarity: string,
+    value: string | number,
+    name: string,
+    behaviourType: string,
+    behaviourValues: {
+        behaviourAttackDamage?: number,
+        behaviourMoveSpeed?: number,
+        behaviourBlockPercentage?: number,
+        behaviourBlockValue?: number
+    }
 }
 
-export const ItemModel: Model<any> = mongoose.model('Item', ItemSchema)
+export const ItemModel: Model<IItemModel> = mongoose.model('Item', ItemSchema)
 

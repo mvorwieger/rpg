@@ -1,4 +1,6 @@
-export interface AttackBehaviour {
-    attackDamage: number;
-    attack: Function;
+import {Behaviour} from './Behaviour'
+
+export class AttackBehaviour implements Behaviour{
+    constructor(public attackDamage: number) {}
+    attack = () => this.attackDamage
 }

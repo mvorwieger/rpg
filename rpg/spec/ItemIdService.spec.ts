@@ -18,9 +18,9 @@ describe('ModelToMongooseModelConverter::', () => {
             )
             try {
                 const convertedPlayer = await itemIdService.convertPlayer(mockPlayer)
-                expect(convertedPlayer.equippedDefenceItemId).toContain(mockId)
-                expect(convertedPlayer.equippedWeaponItemId).toContain(mockId)
-                expect(convertedPlayer.equippedMovementItemId).toContain(mockId)
+                expect(convertedPlayer.defence).toContain(mockId)
+                expect(convertedPlayer.weapon).toContain(mockId)
+                expect(convertedPlayer.movement).toContain(mockId)
             }catch (err) {
                 expect(err).toBeFalsy()
             }

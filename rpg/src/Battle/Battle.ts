@@ -9,16 +9,18 @@ export class Battle implements IBattle{
     private playerWon: Boolean;
     public battleLog: Logger;
 
-    constructor(player: Player, npc: Npc) {
-        this.playerInBattle = Object.assign({}, player)
-        this.npcInBattle = Object.assign({}, npc)
+    constructor(player: Player, opponent: Npc | Player) {
+        this.playerInBattle = player
+        this.npcInBattle = opponent
         this.battleLog = new Logger()
     }
 
     public battle = () => {
+        let roundCounter = 0
         while (this.playerInBattle.health >= 0 && this.npcInBattle.health >= 0) {
             this.playRound();
-            this.battleLog.log({player: this.playerInBattle.stats, npc: this.npcInBattle.stats});
+            roundCounter++
+            this.battleLog.log({round: roundCounter, player: this.playerInBattle.stats, npc: this.npcInBattle.stats});
         }
 
         this.playerWon = this.playerInBattle.health > 0;

@@ -16,10 +16,10 @@ export class PlayerRepository {
     public find  = (id?: string): Promise<IPlayerModel> =>{
         const usedId = Boolean(id) ? id : this.playerId
         return PlayerModel.findById(usedId)
-            .populate('equippedWeaponItemId')
-            .populate('equippedDefenceItemId')
-            .populate('equippedMovementItemId')
-            .populate('inventoryItemIds')
+            .populate('weapon')
+            .populate('defence')
+            .populate('movement')
+            .populate('inventory')
             .exec()
     }
 
@@ -30,7 +30,7 @@ export class PlayerRepository {
      * @param playerId
      * @returns {number} Updated Rows
      */
-    public replace= async (player: Player, playerId?): Promise<number> => {
+    public replace = async (player: Player, playerId?): Promise<number> => {
         const id = playerId ? playerId : this.playerId
         const convertedPlayer  = this.convertPlayerToSchema(player)
         return PlayerModel
@@ -55,18 +55,18 @@ export class PlayerRepository {
      * @returns {Promise<{}>}
      */
     public convertPlayerToSchema = async (player: Player): Promise<any> => {
-        const equippedWeaponItemId = await this.itemService.findId(player.equippedItemList.weapon)
-        const equippedMovementItemId = await this.itemService.findId(player.equippedItemList.foot)
-        const equippedDefenceItemId = await this.itemService.findId(player.equippedItemList.shield)
-        const inventoryItemIds = player.items.map(async d => await this.itemService.findId(d))
+        const weapon = await this.itemService.findId(player.equippedItemList.weapon)
+        const movement = await this.itemService.findId(player.equippedItemList.foot)
+        const defence = await this.itemService.findId(player.equippedItemList.shield)
+        const inventory = player.items.map(async d => await this.itemService.findId(d))
 
         return ({
             health: player.health,
-            inventoryItemIds,
-            equippedWeaponItemId,
-            equippedMovementItemId,
-            equippedDefenceItemId,
-            walletMoney: player.wallet.money
+            inventory,
+            weapon,
+            movement,
+            defence,
+            money: player.wallet.money
         })
     }
 }

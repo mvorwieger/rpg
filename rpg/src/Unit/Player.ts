@@ -10,15 +10,12 @@ import {Wallet} from "../Wallet";
 
 
 export class Player extends Unit {
-    private inventory: Inventory = new Inventory();
     private equippedItems: { weapon: WeaponItem, foot: MovementItem, shield: DefenceItem } = {
         weapon: undefined,
         foot: undefined,
         shield: undefined
     };
-    public wallet = new Wallet();
-
-    constructor(weapon: WeaponItem, foot: MovementItem, shield: DefenceItem) {
+    constructor(weapon: WeaponItem, foot: MovementItem, shield: DefenceItem, public inventory: Inventory, public wallet: Wallet) {
         /**
          * Super Call with the item Behaviours
          */
@@ -96,6 +93,10 @@ export class Player extends Unit {
         }
     }
 
+    /**
+     * Is used to dynamically set a Item based on their behaviour type
+     * @param {Item} item
+     */
     private equipItem(item: Item) {
         if (instanceOfAttackBehaviour(item.behaviour)) {
             this.setWeapon(item as WeaponItem);
@@ -120,7 +121,7 @@ export class Player extends Unit {
      * @param {Wallet} exchangeWallet | Wallet of the opposing Party
      * @return {any}
      */
-    public exchange(amount: number, item: Item, exchangeWallet: Wallet) {
+    public exchange(amount: number, item: Item, exchangeWallet: Wallet): Item | boolean {
         if(this.wallet.sub(amount)) {
             this.moveItemsToInventory([item]);
             exchangeWallet.add(amount);

@@ -1,12 +1,9 @@
 import {Troll} from './Troll';
-import {Run} from '../../items/moveTypes/Run';
-import {Axe} from '../../items/attackTypes/Axe';
-import {Walk} from '../../items/moveTypes/Walk';
-import {Punch} from '../../items/attackTypes/Punch';
 import {Human} from './Human';
-import {NoDefence} from '../../items/defenceTypes/NoDefence';
+import {DefenceBehaviour} from '../../items/Behaviours/DefenceBehaviour'
+import {AttackBehaviour} from '../../items/Behaviours/AttackBehaviour'
+import {MoveBehaviour} from '../../items/Behaviours/MoveBehaviour'
 
 export class NpcFactory {
-    public static createTroll = () => new Troll(new Run(), new Axe(10), new NoDefence());
-    public static createHuman = () => new Human(new Walk(), new Punch(1), new NoDefence());
+    public static createTroll = () => new Troll(new MoveBehaviour(1), new AttackBehaviour(3), new DefenceBehaviour(0, 0));
 }

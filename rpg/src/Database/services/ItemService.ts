@@ -3,7 +3,7 @@ import {IItemModel, ItemModel} from '../models/ItemModel'
 import {AttackBehaviour} from '../../items/Behaviours/AttackBehaviour'
 import {MoveBehaviour} from '../../items/Behaviours/MoveBehaviour'
 import {DefenceBehaviour} from '../../items/Behaviours/DefenceBehaviour'
-import {getBehaviourType} from '../../items/Behaviours/Behaviour'
+import {Behaviour, BehaviourNames, getBehaviourType} from '../../items/Behaviours/Behaviour'
 
 export class ItemService {
     /**
@@ -62,4 +62,26 @@ export class ItemService {
      */
     public findById = async (id: string) => await ItemModel.findById(id)
 
+    public itemModelToItem = (itemModel: IItemModel) => {
+        let behaviour: Behaviour
+
+        switch(itemModel.behaviourType) {
+            case(BehaviourNames.AttackBehaviour):
+                behaviour = new AttackBehaviour(itemModel.behaviourValues.behaviourAttackDamage)
+                break
+            case(BehaviourNames.MoveBehaviour):
+                behaviour = new MoveBehaviour(itemModel.behaviourValues.behaviourMoveSpeed)
+                break
+            case(BehaviourNames.DefenceBehaviour):
+                behaviour = new DefenceBehaviour(itemModel.behaviourValues.behaviourBlockPercentage, itemModel.behaviourValues.behaviourBlockValue)
+                break
+        }
+
+        return new Item(
+            itemModel.rarity,
+            itemModel.value as number,
+            itemModel.name,
+            behaviour
+        )
+    }
 }
