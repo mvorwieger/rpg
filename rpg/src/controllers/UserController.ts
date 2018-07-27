@@ -19,7 +19,7 @@ export class UserController {
                     .then((token) => res.status(200).send(token))
                     .catch(() => res.send(501).send('Internal Server Error'))
             } else {
-                res.status(401).send({error: 'Unauthorised'})
+                res.status(401).send({error: 'Wrong username or password'})
             }
         })
     }
@@ -44,7 +44,11 @@ export class UserController {
     public playerById = async(req, res) => {
         const playerId = req.params.id
         const username = req.token.username
-        res.status(200).send(await this.userService.getCharacter(username, playerId))
+        try{
+            res.status(200).send(await this.userService.getCharacter(username, playerId))
+        }catch (e) {
+            res.status(401).send({error: `Couldnt fetch player with id: ${playerId} from ${username}`, e})
+        }
     }
 
     public profileInformation = (req, res) => {
@@ -57,19 +61,23 @@ export class UserController {
 
                 res.status(200).send(JSON.stringify(strippedUserModel))
             })
+            .catch(e => res.status(401).send({error: 'couldnt fetch Profile Information', e}))
     }
 
     public addPlayerToUser = (req, res) => {
         const selectedRace = req.body.race
         const newPlayer = this.playerService.chooseRace(selectedRace)
+        const username = req.token.username
 
-        this.userService.createPlayerForUser(req.token.username, newPlayer)
+        this.userService.createPlayerForUser(username, newPlayer)
             .then((user) => res.status(200).send(user))
+            .catch(err => res.status(401).send({error: `Coudnt create ${selectedRace} for ${username}`, err}))
     }
 
     public getCharacters = (req, res) => {
         this.userService.getCharacters(req.token.username)
             .then(chars => res.status(200).send(chars))
+            .catch(err => res.status(401).send({error: 'Couldnt fetch characters', err}))
     }
 
     public battle = async(req, res) => {
@@ -77,20 +85,23 @@ export class UserController {
         const user = req.token.username
         const opponentUserName = req.params.opponentUserName
         const opponentPlayerId = req.params.opponentPlayerId
+        try {
+            const playerModel = await this.userService.getCharacter(user, playerId)
+            const player = this.playerService.playerModelToPlayer(playerModel)
 
-        const playerModel = await this.userService.getCharacter(user, playerId)
-        const player = this.playerService.playerModelToPlayer(playerModel)
+            const opponentPlayerModel = await this.userService.getCharacter(opponentUserName, opponentPlayerId)
+            const opponentPlayer = this.playerService.playerModelToPlayer(opponentPlayerModel)
 
-        const opponentPlayerModel = await this.userService.getCharacter(opponentUserName, opponentPlayerId)
-        const opponentPlayer = this.playerService.playerModelToPlayer(opponentPlayerModel)
+            const battle = new Battle(player, opponentPlayer)
+            battle.battle()
+            console.log("Battle finished")
 
-        const battle = new Battle(player, opponentPlayer)
-        battle.battle()
-        console.log("Battle finished")
-
-        res.status(200).send({
-            win: battle.didPlayerWin,
-            logs: battle.battleLog.logs
-        })
+            res.status(200).send({
+                win: battle.didPlayerWin,
+                logs: battle.battleLog.logs
+            })
+        }catch (e) {
+            res.status(501).send({error: `Couldnt create battle`, e})
+        }
     }
 }
