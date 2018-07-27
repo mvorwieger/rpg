@@ -1,13 +1,12 @@
 import {Player} from '../Unit/Player'
-import {IPlayerModel, PlayerModel} from './models/PlayerModel'
-import {Document, default as mongoose} from "mongoose"
 import {ItemService} from './services/ItemService'
-import {Inject} from 'typescript-ioc'
+import {Inject,} from 'typescript-ioc'
+import {IPlayerModel, PlayerModel} from './models/PlayerModel'
 
 export class PlayerRepository {
     public playerId: string
 
-    constructor(@Inject private itemService: ItemService) { }
+    constructor(@Inject private itemService: ItemService, @Inject private playerModel: PlayerModel) { }
     /**
      * used to find a player By Id
      * @param {string} id
@@ -15,7 +14,7 @@ export class PlayerRepository {
      */
     public find  = (id?: string): Promise<IPlayerModel> =>{
         const usedId = Boolean(id) ? id : this.playerId
-        return PlayerModel.findById(usedId)
+        return this.playerModel.Model.findById(usedId)
             .populate('weapon')
             .populate('defence')
             .populate('movement')
@@ -33,7 +32,7 @@ export class PlayerRepository {
     public replace = async (player: Player, playerId?): Promise<number> => {
         const id = playerId ? playerId : this.playerId
         const convertedPlayer  = this.convertPlayerToSchema(player)
-        return PlayerModel
+        return this.playerModel.Model
             .findById(this.playerId)
             .update(convertedPlayer)
     }
@@ -46,7 +45,7 @@ export class PlayerRepository {
      */
     public add = async (player: Player): Promise<any> => {
         const convertedPlayer = await this.convertPlayerToSchema(player)
-        return PlayerModel.create(convertedPlayer)
+        return this.playerModel.Model.create(convertedPlayer)
     }
 
     /**

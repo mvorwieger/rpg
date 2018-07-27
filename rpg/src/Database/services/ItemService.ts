@@ -4,6 +4,7 @@ import {AttackBehaviour} from '../../items/Behaviours/AttackBehaviour'
 import {MoveBehaviour} from '../../items/Behaviours/MoveBehaviour'
 import {DefenceBehaviour} from '../../items/Behaviours/DefenceBehaviour'
 import {Behaviour, BehaviourNames, getBehaviourType} from '../../items/Behaviours/Behaviour'
+import {Inject} from 'typescript-ioc'
 
 export class ItemService {
     /**
@@ -13,7 +14,7 @@ export class ItemService {
      */
     public findId = (item: Item): Promise<any> => {
         return new Promise((resolve, reject) => {
-            ItemModel.findOne({name: item.name})
+            this.itemModel.findOne({name: item.name})
                 .then(doc => resolve(doc._id))
                 .catch(err => reject(err))
         })
@@ -25,8 +26,8 @@ export class ItemService {
      */
     public addItem = (item: Item): Promise<IItemModel> => {
         return new Promise((resolve, reject) => {
-            const model = new ItemModel(this.convertItem(item))
-            ItemModel.create(model)
+            const model = new this.itemModel(this.convertItem(item))
+            this.itemModel.create(model)
                 .then(docs => resolve(docs))
                 .catch(err => reject(err))
         })
@@ -54,34 +55,38 @@ export class ItemService {
      * Returns all items in the Database
      * @returns {Promise<{}[]>}
      */
-    public getAllItems = async () => await ItemModel.find()
+    public getAllItems = async () => await this.itemModel.find()
     /**
      * Finds item by id
      * @param {string} id
      * @returns {Promise<{}>}
      */
-    public findById = async (id: string) => await ItemModel.findById(id)
-
-    public itemModelToItem = (itemModel: IItemModel) => {
+    public findById = async (id: string) => await this.itemModel.findById(id)
+    public itemModelToItem = (model: IItemModel) => {
         let behaviour: Behaviour
 
-        switch(itemModel.behaviourType) {
+        switch(model.behaviourType) {
             case(BehaviourNames.AttackBehaviour):
-                behaviour = new AttackBehaviour(itemModel.behaviourValues.behaviourAttackDamage)
+                behaviour = new AttackBehaviour(model.behaviourValues.behaviourAttackDamage)
                 break
             case(BehaviourNames.MoveBehaviour):
-                behaviour = new MoveBehaviour(itemModel.behaviourValues.behaviourMoveSpeed)
+                behaviour = new MoveBehaviour(model.behaviourValues.behaviourMoveSpeed)
                 break
             case(BehaviourNames.DefenceBehaviour):
-                behaviour = new DefenceBehaviour(itemModel.behaviourValues.behaviourBlockPercentage, itemModel.behaviourValues.behaviourBlockValue)
+                behaviour = new DefenceBehaviour(model.behaviourValues.behaviourBlockPercentage, model.behaviourValues.behaviourBlockValue)
                 break
         }
 
         return new Item(
-            itemModel.rarity,
-            itemModel.value as number,
-            itemModel.name,
+            model.rarity,
+            model.value as number,
+            model.name,
             behaviour
         )
+    }
+    private itemModel: any
+
+    constructor(@Inject itemModel: ItemModel) {
+        this.itemModel = itemModel.Model
     }
 }
