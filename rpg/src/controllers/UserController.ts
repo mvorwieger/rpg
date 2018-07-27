@@ -47,7 +47,7 @@ export class UserController {
         try{
             res.status(200).send(await this.userService.getCharacter(username, playerId))
         }catch (e) {
-            res.status(401).send({error: `Couldnt fetch player with id: ${playerId} from ${username}`, e})
+            res.status(401).send({error: `could not fetch player with id: ${playerId} from ${username}`, e})
         }
     }
 
@@ -61,7 +61,7 @@ export class UserController {
 
                 res.status(200).send(JSON.stringify(strippedUserModel))
             })
-            .catch(e => res.status(401).send({error: 'couldnt fetch Profile Information', e}))
+            .catch(e => res.status(401).send({error: 'could not fetch Profile Information', e}))
     }
 
     public addPlayerToUser = (req, res) => {
@@ -77,7 +77,7 @@ export class UserController {
     public getCharacters = (req, res) => {
         this.userService.getCharacters(req.token.username)
             .then(chars => res.status(200).send(chars))
-            .catch(err => res.status(401).send({error: 'Couldnt fetch characters', err}))
+            .catch(err => res.status(401).send({error: 'could not fetch characters', err}))
     }
 
     public battle = async(req, res) => {
@@ -85,6 +85,7 @@ export class UserController {
         const user = req.token.username
         const opponentUserName = req.params.opponentUserName
         const opponentPlayerId = req.params.opponentPlayerId
+        // TODO: put this logic in UserService / PlayerService ! No Game logic in controller
         try {
             const playerModel = await this.userService.getCharacter(user, playerId)
             const player = this.playerService.playerModelToPlayer(playerModel)
@@ -101,7 +102,7 @@ export class UserController {
                 logs: battle.battleLog.logs
             })
         }catch (e) {
-            res.status(501).send({error: `Couldnt create battle`, e})
+            res.status(501).send({error: `could not create battle`, e})
         }
     }
 }
