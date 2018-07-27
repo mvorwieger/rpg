@@ -9,7 +9,7 @@ export class ItemController {
         try{
             res.status(200).send(await this.itemServcice.findById(id))
         }catch (e) {
-            res.status(401).send({error: `Couldnt fetch Item for id: ${id}`, e})
+            res.status(401).send({error: `could not fetch Item for id: ${id}`, e})
         }
     }
 
