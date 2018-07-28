@@ -1,6 +1,4 @@
-import {Transactor} from "./Transactor";
-
-export class Wallet implements Transactor {
+export class Wallet {
     constructor(private moneyAmount = 0) {
         this.moneyAmount = moneyAmount
     }

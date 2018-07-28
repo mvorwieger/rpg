@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 import {RouterConfig} from './routes/RouterConfig'
-import {NoAttack, NoDefence, NoMovement} from './items/NoItem'
 
 const app = new RouterConfig().createRoutes()
 

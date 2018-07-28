@@ -32,6 +32,15 @@ export class ItemService {
                 .catch(err => reject(err))
         })
     }
+
+    public addItemModel = (item: IItemModel): Promise<IItemModel> => {
+        return new Promise<IItemModel>((resolve, reject) => {
+            const model = new this.itemModel(item)
+            this.itemModel.create(model)
+                .then(docs => resolve(docs))
+                .catch(err => reject(err))
+        })
+    }
     /**
      * converts the Item class to the mongoose schema
      * @param {Item} item

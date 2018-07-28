@@ -1,8 +1,10 @@
 import {Player} from './Player'
 import {Inventory} from '../Inventory'
 import {Wallet} from '../Wallet'
-import {DefenceItem, MovementItem, WeaponItem} from '../items/ItemTypes'
 import {NoAttack, NoDefence, NoMovement} from '../items/NoItem'
+import {WeaponItem} from '../items/types/WeaponItem'
+import {MovementItem} from '../items/types/MovementItem'
+import {DefenceItem} from '../items/types/DefenceItem'
 
 export enum Race {
     Human = 'Human',
