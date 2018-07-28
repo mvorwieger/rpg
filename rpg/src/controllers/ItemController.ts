@@ -27,16 +27,32 @@ export class ItemController {
     public createItem = async (req, res) => {
         const itemModel: IItemModel = req.body
         let item: Item
-        try{
-           item = await this.itemService.itemModelToItem(itemModel)
+        try {
+            item = await this.itemService.itemModelToItem(itemModel)
         } catch (e) {
             res.status(401).send({error: 'bad item format', e})
         }
         try {
             const createdItem = await this.itemService.addItem(item)
             res.status(200).send(createdItem)
-        }catch (e) {
+        } catch (e) {
             res.status(501).send({error: 'Database error', e})
         }
+    }
+
+    // TODO: create generic Malformed input error
+    public updateItem = async (req, res) => {
+        const itemModel: IItemModel = req.body
+        const id = req.params.id
+
+        this.itemService.updateItemById(id, itemModel)
+            .then((response: any) => {
+                if (response.ok) {
+                    res.status(200).send({success: true})
+                    return
+                }
+                throw 'malformed input'
+            })
+            .catch(err => res.status(400).send({error: 'Error while updating User Check your model format', err}))
     }
 }

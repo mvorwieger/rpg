@@ -2,6 +2,7 @@ import {JwtService} from './JwtService'
 import {UserController} from '../controllers/UserController'
 import {ItemController} from '../controllers/ItemController'
 import {Inject, Singleton} from 'typescript-ioc'
+import {Application, Router} from 'express'
 
 const bodyParser = require('body-parser')
 const express = require('express')
@@ -12,7 +13,7 @@ export class RouterConfig {
     @Inject userController: UserController
     @Inject itemController: ItemController
     @Inject jwtService: JwtService
-    private app: any
+    private app: Application
 
     constructor() {
         this.app = express()
@@ -32,6 +33,7 @@ export class RouterConfig {
         this.app.get('/item/:id', this.itemController.getItemById)
         this.app.get('/items', this.itemController.getItems)
         this.app.post('/items', this.itemController.createItem)
+        this.app.put('/item/:id', this.itemController.updateItem)
 
         return this.app
     }
