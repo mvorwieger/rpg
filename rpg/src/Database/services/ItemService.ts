@@ -62,10 +62,15 @@ export class ItemService {
      * @returns {Promise<{}>}
      */
     public findById = async (id: string) => await this.itemModel.findById(id)
-    public itemModelToItem = (model: IItemModel) => {
+    /**
+     * convert itemModel (IITemModel) to Item Class
+     * @param {IItemModel} model
+     * @returns {Item}
+     */
+    public itemModelToItem = (model: IItemModel): Item => {
         let behaviour: Behaviour
 
-        switch(model.behaviourType) {
+        switch (model.behaviourType) {
             case(BehaviourNames.AttackBehaviour):
                 behaviour = new AttackBehaviour(model.behaviourValues.behaviourAttackDamage)
                 break
@@ -84,6 +89,25 @@ export class ItemService {
             behaviour
         )
     }
+    /**
+     * Update Item by id, will run validators beforehand
+     * @param id
+     * @param modifiedModel
+     * @returns {module:mongoose.DocumentQuery<T extends module:mongoose.Document, T extends module:mongoose.Document>}
+     */
+    public updateItemById = (id, modifiedModel) => {
+        return new Promise((resolve, reject) => {
+            this.findById(id)
+                .then((model: IItemModel) => {
+                    model.update({$set: modifiedModel}, {runValidators: true})
+                        .then((u) => resolve(u))
+                        .catch(err => reject(err))
+                })
+                .catch((err) => reject(err))
+        })
+    }
+
+
     private itemModel: any
 
     constructor(@Inject itemModel: ItemModel) {
