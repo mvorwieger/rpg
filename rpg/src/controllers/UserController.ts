@@ -2,7 +2,6 @@ import {UserService} from '../Database/services/UserService'
 import {JwtService} from '../routes/JwtService'
 import {Inject} from 'typescript-ioc'
 import {PlayerService} from '../Database/services/PlayerService'
-import {Battle} from '../Battle/Battle'
 
 export class UserController {
     constructor(@Inject private jwtService: JwtService, @Inject private userService: UserService, @Inject private playerService: PlayerService) { }

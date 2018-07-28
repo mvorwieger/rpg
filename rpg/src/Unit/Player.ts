@@ -5,8 +5,10 @@ import {
     instanceOfMoveBehaviour
 } from '../items/Behaviours/Behaviour'
 import {Item} from '../items/Item';
-import {MovementItem, DefenceItem, WeaponItem} from '../items/ItemTypes';
 import {Wallet} from "../Wallet";
+import {WeaponItem} from '../items/types/WeaponItem'
+import {MovementItem} from '../items/types/MovementItem'
+import {DefenceItem} from '../items/types/DefenceItem'
 
 
 export class Player extends Unit {

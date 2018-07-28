@@ -3,10 +3,12 @@ import {Inject} from 'typescript-ioc'
 import {ItemService} from './ItemService'
 import {Inventory} from '../../Inventory'
 import {Wallet} from '../../Wallet'
-import {DefenceItem, MovementItem, WeaponItem} from '../../items/ItemTypes'
 import {PlayerFactory, Race} from '../../Unit/PlayerFactorie'
 import {Battle} from '../../Battle/Battle'
 import {IPlayerModel} from '../models/PlayerModel'
+import {WeaponItem} from '../../items/types/WeaponItem'
+import {MovementItem} from '../../items/types/MovementItem'
+import {DefenceItem} from '../../items/types/DefenceItem'
 
 export class PlayerService {
     constructor(@Inject private itemService: ItemService, @Inject private playerFactory: PlayerFactory) {

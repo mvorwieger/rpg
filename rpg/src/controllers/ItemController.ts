@@ -1,7 +1,6 @@
 import {ItemService} from '../Database/services/ItemService'
 import {Inject} from 'typescript-ioc'
 import {IItemModel} from '../Database/models/ItemModel'
-import {Item} from '../items/Item'
 
 export class ItemController {
     constructor(@Inject private itemService: ItemService) {
@@ -26,17 +25,10 @@ export class ItemController {
 
     public createItem = async (req, res) => {
         const itemModel: IItemModel = req.body
-        let item: Item
-        try {
-            item = await this.itemService.itemModelToItem(itemModel)
-        } catch (e) {
-            res.status(401).send({error: 'bad item format', e})
-        }
-        try {
-            const createdItem = await this.itemService.addItem(item)
-            res.status(200).send(createdItem)
-        } catch (e) {
-            res.status(501).send({error: 'Database error', e})
+        try{
+            res.status(200).send(await this.itemService.addItemModel(itemModel))
+        }catch (e) {
+            res.status(400).send({error: '->', e})
         }
     }
 
