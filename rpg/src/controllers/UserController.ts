@@ -85,22 +85,12 @@ export class UserController {
         const user = req.token.username
         const opponentUserName = req.params.opponentUserName
         const opponentPlayerId = req.params.opponentPlayerId
-        // TODO: put this logic in UserService / PlayerService ! No Game logic in controller
+
         try {
             const playerModel = await this.userService.getCharacter(user, playerId)
-            const player = this.playerService.playerModelToPlayer(playerModel)
-
             const opponentPlayerModel = await this.userService.getCharacter(opponentUserName, opponentPlayerId)
-            const opponentPlayer = this.playerService.playerModelToPlayer(opponentPlayerModel)
 
-            const battle = new Battle(player, opponentPlayer)
-            battle.battle()
-            console.log("Battle finished")
-
-            res.status(200).send({
-                win: battle.didPlayerWin,
-                logs: battle.battleLog.logs
-            })
+            res.status(200).send(await this.playerService.battle(playerModel, opponentPlayerModel))
         }catch (e) {
             res.status(501).send({error: `could not create battle`, e})
         }
