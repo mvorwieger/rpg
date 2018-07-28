@@ -26,10 +26,12 @@ export class RouterConfig {
         this.app.get('/me', this.jwtService.authenticateJwt, this.userController.profileInformation)
         this.app.post('/me/player', this.jwtService.authenticateJwt, this.userController.addPlayerToUser)
         this.app.get('/me/player/:id', this.jwtService.authenticateJwt, this.userController.playerById)
-        this.app.get('/item/:id', this.itemController.getItemById)
-        this.app.get('/items', this.itemController.getItems)
         this.app.get('/me/players', this.jwtService.authenticateJwt, this.userController.getCharacters)
         this.app.get('/me/player/:id/fight/:opponentUserName/player/:opponentPlayerId', this.jwtService.authenticateJwt, this.userController.battle)
+
+        this.app.get('/item/:id', this.itemController.getItemById)
+        this.app.get('/items', this.itemController.getItems)
+        this.app.post('/items', this.itemController.createItem)
 
         return this.app
     }
