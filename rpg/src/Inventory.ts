@@ -1,7 +1,16 @@
-import {Item} from './items/Item';
+import {Item} from './items/Item'
 
 export class Inventory {
-    constructor(private inventoryItems: Item[] = []) {}
+    constructor(private inventoryItems: Item[] = []) {
+    }
+
+    /**
+     * gives you readonly instance of the Inventory
+     * @return {Item[]}
+     */
+    public get items(): Item[] {
+        return this.inventoryItems
+    }
 
     /**
      * Searched Items in the Inventory Array by name<string>
@@ -9,7 +18,7 @@ export class Inventory {
      * @return {Item}
      */
     public searchItem(nameOfItem: string): Item {
-        return this.inventoryItems.find((iterator: Item) => iterator.name === nameOfItem);
+        return this.inventoryItems.find((iterator: Item) => iterator.name === nameOfItem)
     }
 
     /**
@@ -17,7 +26,7 @@ export class Inventory {
      * @param {Item} item
      */
     public add(item: Item): void {
-        this.inventoryItems.push(item);
+        this.inventoryItems.push(item)
     }
 
     /**
@@ -25,7 +34,7 @@ export class Inventory {
      * @param {Item} item
      */
     public removeItem(item: Item): void {
-        this.inventoryItems = this.inventoryItems.filter((itemIterator: Item) => itemIterator !== item);
+        this.inventoryItems = this.inventoryItems.filter((itemIterator: Item) => itemIterator !== item)
     }
 
     /**
@@ -35,13 +44,5 @@ export class Inventory {
      */
     public contains(item): boolean {
         return Boolean(this.inventoryItems.filter((currentItem: Item) => item.name === currentItem.name).length)
-    }
-
-    /**
-     * gives you readonly instance of the Inventory
-     * @return {Item[]}
-     */
-    public get items(): Item[] {
-        return this.inventoryItems;
     }
 }

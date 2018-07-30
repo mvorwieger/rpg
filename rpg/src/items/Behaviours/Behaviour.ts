@@ -1,28 +1,33 @@
-import {AttackBehaviour} from './AttackBehaviour';
-import {DefenceBehaviour} from './DefenceBehaviour';
-import {MoveBehaviour} from './MoveBehaviour';
+import {AttackBehaviour} from './AttackBehaviour'
+import {DefenceBehaviour} from './DefenceBehaviour'
+import {MoveBehaviour} from './MoveBehaviour'
 
 export interface Behaviour {
-    moveSpeed?: number,
-    attackDamage?: number,
-    blockValue?: number,
-    blockPercentage?: number
+    values: {
+        moveSpeed?: number,
+        attackDamage?: number,
+        blockValue?: number,
+        blockPercentage?: number
+    }
+    type: BehaviourNames.AttackBehaviour | BehaviourNames.DefenceBehaviour | BehaviourNames.MoveBehaviour
 }
+
 export enum BehaviourNames {
     AttackBehaviour = 'attack',
     DefenceBehaviour = 'defence',
     MoveBehaviour = 'move'
 }
+
 export function instanceOfAttackBehaviour(behaviour: any): behaviour is AttackBehaviour {
-    return Boolean(behaviour.attack);
+    return Boolean(behaviour.attack)
 }
 
 export function instanceOfDefenceBehaviour(behaviour: any): behaviour is DefenceBehaviour {
-    return Boolean(behaviour.block);
+    return Boolean(behaviour.block)
 }
 
 export function instanceOfMoveBehaviour(behaviour: any): behaviour is MoveBehaviour {
-    return Boolean(behaviour.move);
+    return Boolean(behaviour.move)
 }
 
 export function getBehaviourType(behaviour: Behaviour): String {

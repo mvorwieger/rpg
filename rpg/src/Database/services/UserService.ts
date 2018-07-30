@@ -89,6 +89,7 @@ export class UserService {
         }
     }
     private userModel: any
+
     constructor(@Inject private playerRepository: PlayerRepository, @Inject userModel: UserModel) {
         this.userModel = userModel.Model
     }

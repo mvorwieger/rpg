@@ -12,7 +12,7 @@ export class ItemService {
      * @param {Item} item
      * @returns {Promise<IItemModel>}
      */
-    public findId = (item: Item): Promise<any> => {
+    public findId = (item: Item): Promise<string> => {
         return new Promise((resolve, reject) => {
             this.itemModel.findOne({name: item.name})
                 .then(doc => resolve(doc._id))
@@ -51,13 +51,8 @@ export class ItemService {
             rarity: item.rarity,
             value: item.value,
             name: item.name,
-            behaviourType: getBehaviourType(item.behaviour),
-            behaviourValues: {
-                behaviourAttackDamage: (item.behaviour as AttackBehaviour).attackDamage,
-                behaviourMoveSpeed: (item.behaviour as MoveBehaviour).moveSpeed,
-                behaviourBlockPercentage: (item.behaviour as DefenceBehaviour).blockPercentage,
-                behaviourBlockValue: (item.behaviour as DefenceBehaviour).blockAmount
-            }
+            behaviourType: item.type,
+            behaviourValues: item.behaviour
         }
     }
     /**
@@ -104,7 +99,7 @@ export class ItemService {
      * @param modifiedModel
      * @returns {module:mongoose.DocumentQuery<T extends module:mongoose.Document, T extends module:mongoose.Document>}
      */
-    public updateItemById = (id, modifiedModel) => {
+    public updateItemById = (id: string, modifiedModel: any) => {
         return new Promise((resolve, reject) => {
             this.findById(id)
                 .then((model: IItemModel) => {

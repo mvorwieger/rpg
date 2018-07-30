@@ -15,9 +15,9 @@ export enum Race {
 export class PlayerFactory {
 
     public chooseRace = (race: Race): Player => {
-        if(race == Race.Human) return this.generateHuman()
-        if(race == Race.Orc) return this.generateOrc()
-        if(race == Race.Gnome) return this.generateGnome()
+        if (race == Race.Human) return this.generateHuman()
+        if (race == Race.Orc) return this.generateOrc()
+        if (race == Race.Gnome) return this.generateGnome()
         return this.generateHuman()
     }
 

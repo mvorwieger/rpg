@@ -1,5 +1,4 @@
-import {Player} from '../Unit/Player';
-import {Npc} from '../Unit/npc/Npc';
+import {Player} from '../Unit/Player'
 
 export interface IBattle {
     didPlayerWin: Boolean

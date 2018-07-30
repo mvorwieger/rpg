@@ -4,8 +4,6 @@ import {Inject} from 'typescript-ioc'
 import {PlayerService} from '../Database/services/PlayerService'
 
 export class UserController {
-    constructor(@Inject private jwtService: JwtService, @Inject private userService: UserService, @Inject private playerService: PlayerService) { }
-
     public login = (req, res) => {
         const user = {
             username: req.body.username,
@@ -22,7 +20,6 @@ export class UserController {
             }
         })
     }
-
     public register = (req, res) => {
         const user = {
             username: req.body.username,
@@ -39,17 +36,15 @@ export class UserController {
                 res.status(501).send({error: "Internal Server Error"})
             })
     }
-
-    public playerById = async(req, res) => {
+    public playerById = async (req, res) => {
         const playerId = req.params.id
         const username = req.token.username
-        try{
+        try {
             res.status(200).send(await this.userService.getCharacter(username, playerId))
-        }catch (e) {
+        } catch (e) {
             res.status(401).send({error: `could not fetch player with id: ${playerId} from ${username}`, e})
         }
     }
-
     public profileInformation = (req, res) => {
         this.userService.profileInformation(req.token.username)
             .then(r => {
@@ -62,7 +57,6 @@ export class UserController {
             })
             .catch(e => res.status(401).send({error: 'could not fetch Profile Information', e}))
     }
-
     public addPlayerToUser = (req, res) => {
         const selectedRace = req.body.race
         const newPlayer = this.playerService.chooseRace(selectedRace)
@@ -72,14 +66,12 @@ export class UserController {
             .then((user) => res.status(200).send(user))
             .catch(err => res.status(401).send({error: `Coudnt create ${selectedRace} for ${username}`, err}))
     }
-
     public getCharacters = (req, res) => {
         this.userService.getCharacters(req.token.username)
             .then(chars => res.status(200).send(chars))
             .catch(err => res.status(401).send({error: 'could not fetch characters', err}))
     }
-
-    public battle = async(req, res) => {
+    public battle = async (req, res) => {
         const playerId = req.params.id
         const user = req.token.username
         const opponentUserName = req.params.opponentUserName
@@ -90,8 +82,11 @@ export class UserController {
             const opponentPlayerModel = await this.userService.getCharacter(opponentUserName, opponentPlayerId)
 
             res.status(200).send(await this.playerService.battle(playerModel, opponentPlayerModel))
-        }catch (e) {
+        } catch (e) {
             res.status(501).send({error: `could not create battle`, e})
         }
+    }
+
+    constructor(@Inject private jwtService: JwtService, @Inject private userService: UserService, @Inject private playerService: PlayerService) {
     }
 }
