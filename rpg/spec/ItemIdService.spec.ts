@@ -6,7 +6,7 @@ import {MovementFactory} from '../src/items/MovementFactory'
 import {ShieldFactory} from '../src/items/ShieldFactory'
 
 const mockId = 'SomeId'
-itemIdService.itemService.findId = async() => mockId
+itemIdService.itemService.getItemIdByName = async() => mockId
 
 describe('ModelToMongooseModelConverter::', () => {
     describe('convertPlayer()', () => {

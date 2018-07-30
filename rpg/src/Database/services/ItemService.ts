@@ -12,9 +12,9 @@ export class ItemService {
      * @param {Item} item
      * @returns {Promise<IItemModel>}
      */
-    public findId = (item: Item): Promise<any> => {
+    public getItemIdByName = (name: string): Promise<any> => {
         return new Promise((resolve, reject) => {
-            this.itemModel.findOne({name: item.name})
+            this.itemModel.findOne({name: name})
                 .then(doc => resolve(doc._id))
                 .catch(err => reject(err))
         })

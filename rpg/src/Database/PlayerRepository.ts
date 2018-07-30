@@ -54,10 +54,10 @@ export class PlayerRepository {
      * @returns {Promise<{}>}
      */
     public convertPlayerToSchema = async (player: Player): Promise<any> => {
-        const weapon = await this.itemService.findId(player.equippedItemList.weapon)
-        const movement = await this.itemService.findId(player.equippedItemList.foot)
-        const defence = await this.itemService.findId(player.equippedItemList.shield)
-        const inventory = player.items.map(async d => await this.itemService.findId(d))
+        const weapon = await this.itemService.getItemIdByName(player.equippedItemList.weapon.name)
+        const movement = await this.itemService.getItemIdByName(player.equippedItemList.foot.name)
+        const defence = await this.itemService.getItemIdByName(player.equippedItemList.shield.name)
+        const inventory = player.items.map(async item => await this.itemService.getItemIdByName(item.name))
 
         return ({
             health: player.health,
