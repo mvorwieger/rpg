@@ -1,4 +1,5 @@
-import {Document, Model, Schema, Types} from "mongoose"
+import {Schema} from "mongoose"
+
 const mongoose = require('mongoose')
 
 const RaceSchema: Schema = new Schema({

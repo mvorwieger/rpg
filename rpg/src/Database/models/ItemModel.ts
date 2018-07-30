@@ -30,13 +30,13 @@ export class ItemModel {
         },
         behaviourValues: {
             type: {
-                behaviourAttackDamage: {
+                attackDamage: {
                     type: Number,
                     required: function () {
                         return this.behaviourType == BehaviourNames.AttackBehaviour
                     }
                 },
-                behaviourMoveSpeed: {
+                moveSpeed: {
                     type: Number,
                     required: function () {
                         return this.behaviourType == BehaviourNames.MoveBehaviour
@@ -44,8 +44,8 @@ export class ItemModel {
                 },
                 behaviourBlock: {
                     type: {
-                        behaviourBlockPercentage: Number,
-                        behaviourBlockValue: Number
+                        blockPercentage: Number,
+                        blockAmount: Number
                     },
                     required: function () {
                         return this.behaviourType == BehaviourNames.DefenceBehaviour

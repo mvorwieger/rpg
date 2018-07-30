@@ -5,6 +5,14 @@ export class Item {
         public rarity: string,
         public value: number,
         public name: string,
-        public behaviour: Behaviour
+        private _behaviour: Behaviour
     ) { }
+
+    public get behaviour() {
+        return this._behaviour.values
+    }
+
+    public get type() {
+        return this._behaviour.type
+    }
 }

@@ -1,8 +1,17 @@
 import {readFileSync} from 'fs'
+
 const jwt = require('jsonwebtoken')
 
 export class JwtService {
     public privateKey
+    public authenticateJwt = (req, res, next) => {
+        const token = req.token
+
+        this.verifyJwt(token).then(decoded => {
+            req.token = decoded
+            next()
+        }).catch(() => res.status(401).send('Unauthorized'))
+    }
 
     constructor() {
         // TODO: Inject the privateKey somehow
@@ -25,14 +34,5 @@ export class JwtService {
                 resolve(decoded)
             })
         })
-    }
-
-    public authenticateJwt = (req, res, next) => {
-        const token = req.token
-
-        this.verifyJwt(token).then(decoded => {
-            req.token = decoded
-            next()
-        }).catch(() => res.status(401).send('Unauthorized'))
     }
 }
