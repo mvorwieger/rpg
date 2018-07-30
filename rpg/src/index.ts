@@ -1,7 +1,5 @@
 const mongoose = require('mongoose')
 import {RouterConfig} from './routes/RouterConfig'
-import {Rarity} from './items/defaults/Raritys'
-import {AttackBehaviour} from './items/Behaviours/AttackBehaviour'
 
 const app = new RouterConfig().createRoutes()
 
