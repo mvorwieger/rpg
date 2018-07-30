@@ -11,9 +11,6 @@ import {MovementItem} from '../../items/types/MovementItem'
 import {DefenceItem} from '../../items/types/DefenceItem'
 
 export class PlayerService {
-    constructor(@Inject private itemService: ItemService, @Inject private playerFactory: PlayerFactory) {
-    }
-
     public playerModelToPlayer = (playerModel: any): Player => new Player(
         this.itemService.itemModelToItem(playerModel.weapon) as WeaponItem,
         this.itemService.itemModelToItem(playerModel.movement) as MovementItem,
@@ -21,8 +18,7 @@ export class PlayerService {
         new Inventory(playerModel.inventory.map(this.itemService.itemModelToItem)),
         new Wallet(playerModel.money)
     )
-
-    public battle = async(playerModel: IPlayerModel,  opponent: IPlayerModel) => {
+    public battle = async (playerModel: IPlayerModel, opponent: IPlayerModel) => {
         const player = this.playerModelToPlayer(playerModel)
         const opponentPlayer = this.playerModelToPlayer(opponent)
 
@@ -34,6 +30,8 @@ export class PlayerService {
             logs: battle.battleLog.logs
         }
     }
+    public chooseRace = (race: Race): Player => this.playerFactory.chooseRace(race)
 
-    public chooseRace = (race: Race): Player =>  this.playerFactory.chooseRace(race)
+    constructor(@Inject private itemService: ItemService, @Inject private playerFactory: PlayerFactory) {
+    }
 }

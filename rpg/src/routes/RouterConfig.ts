@@ -2,9 +2,8 @@ import {JwtService} from './JwtService'
 import {UserController} from '../controllers/UserController'
 import {ItemController} from '../controllers/ItemController'
 import {Inject, Singleton} from 'typescript-ioc'
-import {Application, Router} from 'express'
+import {Application} from 'express'
 
-const bodyParser = require('body-parser')
 const express = require('express')
 const bearerToken = require('express-bearer-token')
 

@@ -7,13 +7,15 @@ const mongoose = require('mongoose'),
 
 @Singleton
 export class UserModel {
-    UserSchema = new Schema({
-        username: {type: String, required: true, index: {unique: true}},
-        password: {type: String, required: true},
-        characters: {type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Player'}], default: []}
-    })
+    UserSchema: any;
+    Model: any;
 
     constructor() {
+        this.UserSchema = new Schema({
+            username: {type: String, required: true, index: {unique: true}},
+            password: {type: String, required: true},
+            characters: {type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Player'}], default: []}
+        })
         this.UserSchema.pre('save', function (next) {
             const user = this
             if (!user.isModified('password')) return next()
@@ -39,9 +41,9 @@ export class UserModel {
                 })
             })
         }
-    }
 
-    Model = mongoose.model('User', this.UserSchema)
+        this.Model = mongoose.model('User', this.UserSchema)
+    }
 }
 
 

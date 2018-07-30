@@ -1,6 +1,8 @@
 import {Document, Schema} from "mongoose"
 import {Singleton} from 'typescript-ioc'
+
 const mongoose = require('mongoose')
+
 @Singleton
 export class PlayerModel {
     public PlayerSchema: Schema = new Schema({
