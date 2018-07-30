@@ -1,6 +1,6 @@
 import {Player} from '../../Unit/Player'
 import {Inject} from 'typescript-ioc'
-import {ItemService} from './ItemService'
+import {ItemRepository} from '../ItemRepository'
 import {Inventory} from '../../Inventory'
 import {Wallet} from '../../Wallet'
 import {PlayerFactory, Race} from '../../Unit/PlayerFactorie'
@@ -32,6 +32,6 @@ export class PlayerService {
     }
     public chooseRace = (race: Race): Player => this.playerFactory.chooseRace(race)
 
-    constructor(@Inject private itemService: ItemService, @Inject private playerFactory: PlayerFactory) {
+    constructor(@Inject private itemService: ItemRepository, @Inject private playerFactory: PlayerFactory) {
     }
 }

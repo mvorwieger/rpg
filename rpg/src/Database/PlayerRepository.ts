@@ -1,5 +1,5 @@
 import {Player} from '../Unit/Player'
-import {ItemService} from './services/ItemService'
+import {ItemRepository} from './ItemRepository'
 import {Inject,} from 'typescript-ioc'
 import {IPlayerModel, PlayerModel} from './models/PlayerModel'
 
@@ -64,6 +64,6 @@ export class PlayerRepository {
         })
     }
 
-    constructor(@Inject private itemService: ItemService, @Inject private playerModel: PlayerModel) {
+    constructor(@Inject private itemService: ItemRepository, @Inject private playerModel: PlayerModel) {
     }
 }

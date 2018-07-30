@@ -1,12 +1,12 @@
-import {Item} from '../../items/Item'
-import {IItemModel, ItemModel} from '../models/ItemModel'
-import {AttackBehaviour} from '../../items/Behaviours/AttackBehaviour'
-import {MoveBehaviour} from '../../items/Behaviours/MoveBehaviour'
-import {DefenceBehaviour} from '../../items/Behaviours/DefenceBehaviour'
-import {Behaviour, BehaviourNames, getBehaviourType} from '../../items/Behaviours/Behaviour'
+import {Item} from '../items/Item'
+import {IItemModel, ItemModel} from './models/ItemModel'
+import {AttackBehaviour} from '../items/Behaviours/AttackBehaviour'
+import {MoveBehaviour} from '../items/Behaviours/MoveBehaviour'
+import {DefenceBehaviour} from '../items/Behaviours/DefenceBehaviour'
+import {Behaviour, BehaviourNames, getBehaviourType} from '../items/Behaviours/Behaviour'
 import {Inject} from 'typescript-ioc'
 
-export class ItemService {
+export class ItemRepository {
     /**
      * gives you the items id if it can find the Item in the Database
      * @param {Item} item
