@@ -1,5 +1,5 @@
 import {Player} from '../Unit/Player'
-import {ItemService} from './services/ItemService'
+import {ItemRepository} from './ItemRepository'
 import {Inject,} from 'typescript-ioc'
 import {IPlayerModel, PlayerModel} from './models/PlayerModel'
 
@@ -48,11 +48,11 @@ export class PlayerRepository {
      * @param {Player} player
      * @returns {Promise<{}>}
      */
-    public convertPlayerToSchema = async (player: Player): Promise<{ health: number, inventory: string[], weapon: string, movement: string, defence: string, money: number }> => {
-        const weapon: string = await this.itemService.findId(player.equippedItemList.weapon)
-        const movement: string = await this.itemService.findId(player.equippedItemList.foot)
-        const defence: string = await this.itemService.findId(player.equippedItemList.shield)
-        const inventory: Array<any> = player.items.map(async item => await this.itemService.findId(item))
+    public convertPlayerToSchema = async (player: Player): Promise<any> => {
+        const weapon = await this.itemService.getItemIdByName(player.equippedItemList.weapon.name)
+        const movement = await this.itemService.getItemIdByName(player.equippedItemList.foot.name)
+        const defence = await this.itemService.getItemIdByName(player.equippedItemList.shield.name)
+        const inventory = player.items.map(async item => await this.itemService.getItemIdByName(item.name))
 
         return ({
             health: player.health,
@@ -64,6 +64,6 @@ export class PlayerRepository {
         })
     }
 
-    constructor(@Inject private itemService: ItemService, @Inject private playerModel: PlayerModel) {
+    constructor(@Inject private itemService: ItemRepository, @Inject private playerModel: PlayerModel) {
     }
 }

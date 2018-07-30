@@ -1,4 +1,4 @@
-import {ItemService} from '../Database/services/ItemService'
+import {ItemRepository} from '../Database/ItemRepository'
 import {Inject} from 'typescript-ioc'
 import {IItemModel} from '../Database/models/ItemModel'
 
@@ -42,6 +42,6 @@ export class ItemController {
             .catch(err => res.status(400).send({error: 'Error while updating User Check your model format', err}))
     }
 
-    constructor(@Inject private itemService: ItemService) {
+    constructor(@Inject private itemService: ItemRepository) {
     }
 }

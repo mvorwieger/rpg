@@ -1,20 +1,21 @@
-import {Item} from '../../items/Item'
-import {IItemModel, ItemModel} from '../models/ItemModel'
-import {AttackBehaviour} from '../../items/Behaviours/AttackBehaviour'
-import {MoveBehaviour} from '../../items/Behaviours/MoveBehaviour'
-import {DefenceBehaviour} from '../../items/Behaviours/DefenceBehaviour'
-import {Behaviour, BehaviourNames, getBehaviourType} from '../../items/Behaviours/Behaviour'
+import {Item} from '../items/Item'
+import {IItemModel, ItemModel} from './models/ItemModel'
+import {AttackBehaviour} from '../items/Behaviours/AttackBehaviour'
+import {MoveBehaviour} from '../items/Behaviours/MoveBehaviour'
+import {DefenceBehaviour} from '../items/Behaviours/DefenceBehaviour'
+import {Behaviour, BehaviourNames, getBehaviourType} from '../items/Behaviours/Behaviour'
 import {Inject} from 'typescript-ioc'
 
-export class ItemService {
+export class ItemRepository {
     /**
      * gives you the items id if it can find the Item in the Database
      * @param {Item} item
      * @returns {Promise<IItemModel>}
      */
-    public findId = (item: Item): Promise<string> => {
+
+    public getItemIdByName = (name: string): Promise<any> => {
         return new Promise((resolve, reject) => {
-            this.itemModel.findOne({name: item.name})
+            this.itemModel.findOne({name: name})
                 .then(doc => resolve(doc._id))
                 .catch(err => reject(err))
         })
